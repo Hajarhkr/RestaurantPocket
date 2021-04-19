@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Table } from 'react-bootstrap'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import { faList } from '@fortawesome/free-solid-svg-icons'
 
 const TableColor = {backgroundColor:'#FFFFFF'};
 const CardColor = {backgroundColor:'#f7f6e7'};
@@ -8,7 +10,7 @@ export default class PlatList extends Component {
     render() {
         return (
             <Card  style={CardColor}>
-                <Card.Header> Liste de Plats</Card.Header>
+                <Card.Header><FontAwesomeIcon icon={faList} />  Liste de Plats</Card.Header>
                 <Card.Body>
                     <Table border hover striped variant="light" style={TableColor}>
                         <thead>

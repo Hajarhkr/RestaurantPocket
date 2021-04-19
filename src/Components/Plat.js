@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Form, Button, Col } from 'react-bootstrap'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import { faSave, faPlusSquare} from '@fortawesome/free-solid-svg-icons'
 
 const CardColor = { backgroundColor: '#f7f6e7' };
 
@@ -27,7 +29,7 @@ export default class Plat extends Component {
 
     render() {
         return (<Card style={CardColor}>
-            <Card.Header> Ajouter un Plat</Card.Header>
+            <Card.Header><FontAwesomeIcon icon={faPlusSquare} /> Ajouter un Plat</Card.Header>
             <Form onSubmit={this.submitPlat} id="MenuFormId">
                 <Card.Body>
 
@@ -74,11 +76,11 @@ export default class Plat extends Component {
                     </Form.Row>
                 </Card.Body>
                 <Card.Footer style={{"textAlign":"right"}}>
-                    <Button
+                    <Button 
                         size="sm"
                         variant="success"
                         type="submit">
-                        Ajouter
+                        <FontAwesomeIcon icon={faSave} />Ajouter
                     </Button>
                 </Card.Footer>
 
