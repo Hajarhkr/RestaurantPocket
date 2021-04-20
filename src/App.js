@@ -1,7 +1,7 @@
 
 import { Container, Row, Jumbotron, Col } from 'react-bootstrap';
 import './App.css';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import NavigationBar from './Components/NavigationBar'
 import Welcome from './Components/Welcome'
 import Footer from './Components/Footer'
@@ -10,8 +10,37 @@ import PlatList from './Components/PlatList';
 import Home from './Components/Home';
 import Bilan from './Components/Bilan';
 import Qr from './Components/Qr';
+import Login from "./Components/login";
 
-function App() {
+import Chef from "./Components/Chef";
+
+import "./Components/globale";
+
+const authentication = {
+  getLogInStatus() {
+    return global.logdin;
+  },
+};
+
+
+
+
+function SecuredRoute(props) {
+  return (
+    <Route
+      path={props.path}
+      render={(data) =>
+        authentication.getLogInStatus() ? (
+          <props.component {...data}></props.component>
+        ) : (
+          <Redirect to={{ pathname: "/" }}></Redirect>
+        )
+      }
+    ></Route>
+  );
+}
+
+const App = () => {
 
   const marginTop = {
     marginTop: "20px"
@@ -19,36 +48,44 @@ function App() {
 
 
   return (
-    
-      <Router>
+
+
+
+    <Router>
       <NavigationBar />
+      <Route path="/" exact component={Login} />
+      <SecuredRoute path="/choixchef" component={Chef}></SecuredRoute>
+
+
+
       <Container>
         <Row>
 
           <Col lg={12} style={marginTop}>
             <Switch>
-              
-              <Route path="/" exact component={Welcome}/>
-              <Route path="/add" exact component={Plat}/>
-              <Route path="/edit/:id" exact component={Plat}/>
-              <Route path="/list" exact component={PlatList}/>
-              <Route path="/Home" exact component={Home}/>
-              <Route path="/Qr" exact component={Qr}/>
-              <Route path="/Bilan" exact component={Bilan}/>
-               
-              
-              
-              
+
+
+              <Route path="/Welcome" exact component={Welcome} />
+              <Route path="/add" exact component={Plat} />
+              <Route path="/edit/:id" exact component={Plat} />
+              <Route path="/list" exact component={PlatList} />
+              <Route path="/Home" exact component={Home} />
+              <Route path="/Qr" exact component={Qr} />
+              <Route path="/Bilan" exact component={Bilan} />
+
+
             </Switch>
-           
+
           </Col>
 
         </Row>
       </Container>
-      <Footer />
-      </Router>
-    
-  );
+
+
+      {/* <Footer /> */}
+    </Router>
+  )
+
 }
 
 export default App;

@@ -14,37 +14,55 @@ export default class Plat extends Component {
         this.state.show = false;
         this.platChange = this.platChange.bind(this);
         this.submitPlat = this.submitPlat.bind(this);
-    }
-
-    initialState = {
-        id: '', nomplat: '', description: '', prix: '', categorie: '', coverPhotoURL: ''
     };
 
-    componentDidMount =()=> {
+    initialState = {
+        platId: '', nomplat: '', description: '', prix: '', categorie: '', coverPhotoURL: ''
+    };
+
+    componentDidMount = () => {
         const platId = +this.props.match.params.id;
         if (platId) {
             this.findPlatById(platId);
         }
     }
 
-
     findPlatById = platId => {
-        axios.get("http://localhost:8080/api/plats/" + platId)
-            .then(response => {
-                if (response.data = !null) {
+        fetch("http://localhost:8080/api/plats/" + platId)
+            .then(response =>response.json())
+            .then((plat) => {
+                if (plat = !null) {
                     this.setState({
-                        id: response.data.id,
-                        nomplat: response.data.nomplat,
-                        description: response.data.description,
-                        prix: response.data.prix,
-                        categorie: response.data.categorie,
-                        coverPhotoURL: response.data.coverPhotoURL,
+                        id: plat.id,
+                        nomplat: plat.nomplat,
+                        description: plat.description,
+                        prix: plat.prix,
+                        categorie: plat.categorie,
+                        coverPhotoURL: plat.coverPhotoURL,
                     });
                 }
             }).catch((error) => {
                 console.error("error-" + error)
             });
     }
+
+    // findPlatById = platId => {
+    //     axios.get("http://localhost:8080/api/plats/" + platId)
+    //         .then(response => {
+    //             if (response.data = !null) {
+    //                 this.setState({
+    //                     id: response.data.id,
+    //                     nomplat: response.data.nomplat,
+    //                     description: response.data.description,
+    //                     prix: response.data.prix,
+    //                     categorie: response.data.categorie,
+    //                     coverPhotoURL: response.data.coverPhotoURL,
+    //                 });
+    //             }
+    //         }).catch((error) => {
+    //             console.error("error-" + error)
+    //         });
+    // }
 
     resetPlat = () => {
         this.setState(() => this.initialState);
@@ -65,7 +83,7 @@ export default class Plat extends Component {
         axios.post("http://localhost:8080/api/plats", plat)
             .then(response => {
                 if (response.data != null) {
-                    this.setState({ "show": true, "methode":"post" })
+                    this.setState({ "show": true, "methode": "post" })
                     setTimeout(() => this.setState({ "show": false }), 3000);
                 } else {
                     this.setState({ "show": false })
@@ -81,11 +99,11 @@ export default class Plat extends Component {
         });
     };
 
-    updatePlat = event =>{
+    updatePlat = event => {
         event.preventDefault();
 
         const plat = {
-            id:this.state.id,
+            id: this.state.id,
             nomplat: this.state.nomplat,
             description: this.state.description,
             prix: this.state.prix,
@@ -96,7 +114,7 @@ export default class Plat extends Component {
         axios.put("http://localhost:8080/api/plats", plat)
             .then(response => {
                 if (response.data != null) {
-                    this.setState({ "show": true, "method":"put"})
+                    this.setState({ "show": true, "method": "put" })
                     setTimeout(() => this.setState({ "show": false }), 3000);
                     setTimeout(() => this.platList(), 3000);
                 } else {
@@ -118,17 +136,17 @@ export default class Plat extends Component {
         return (
             <div>
                 <div style={{ "display": this.state.show ? "block" : "none" }}>
-                    <MyToast show={this.state.show} message={this.state.method === "put" ? "Plat modifié avec succés": "Plat enregistrée"} type={"success"} />
+                    <MyToast show={this.state.show} message={this.state.method === "put" ? "Plat modifié avec succés" : "Plat enregistrée"} type={"success"} />
                 </div>
                 <Card style={CardColor}>
-                    <Card.Header><FontAwesomeIcon icon={this.state.id ? faEdit: faPlusSquare} />{' '}{this.state.id ? "Modifier ce plat": "Ajouter un Plat"}</Card.Header>
+                    <Card.Header><FontAwesomeIcon icon={this.state.id ? faEdit : faPlusSquare} />{' '}{this.state.id ? "Modifier ce plat" : "Ajouter un Plat"}</Card.Header>
                     <Form onReset={this.resetPlat} onSubmit={this.state.id ? this.updatePlat : this.submitPlat} id="MenuFormId">
                         <Card.Body>
 
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formGridNomplat">
-                                    <Form.Label>Nom:</Form.Label>
+                                    <Form.Label>Nom:*</Form.Label>
                                     <Form.Control required autoComplete="off"
                                         type="text" name="nomplat"
                                         value={nomplat}
@@ -137,7 +155,7 @@ export default class Plat extends Component {
                                         placeholder="Entrer le nom du plat" />
                                 </Form.Group>
                                 <Form.Group as={Col} controlId="formGridDescription">
-                                    <Form.Label>Description:</Form.Label>
+                                    <Form.Label>Description:*</Form.Label>
                                     <Form.Control required autoComplete="off"
                                         type="text" name="description"
                                         value={description}
@@ -193,8 +211,8 @@ export default class Plat extends Component {
                                 size="sm"
                                 variant="success"
                                 type="submit">
-                                <FontAwesomeIcon icon={faSave} />{' '}{this.state.id ? "Update": "Ajouter"}
-                    </Button>{' '}
+                                <FontAwesomeIcon icon={faSave} />{' '}{this.state.id ? "Update" : "Ajouter"}
+                            </Button>{' '}
                             <Button
                                 size="sm"
                                 variant="info"

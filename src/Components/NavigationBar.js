@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { Navbar, Nav, NavDropdown, Dropdown } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 
-const navbar = {backgroundColor: '#f2a154'};
+const navbar = {backgroundColor: '#c05812cc'};
+// const navbar = {backgroundColor: '#f2a154'};
 
 export default class NavigationBar extends Component {
     
