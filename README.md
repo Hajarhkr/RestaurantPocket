@@ -1,13 +1,13 @@
 Make Sure you are in the master /main branch because that' what i want to merge to
 #Git Commands
-* git pull origin main *
+* git pull origin main 
 
 //this fetches all the code from the remote and it merges it into our mainbranch because that's what we indicated after origin. from the main branch from the remote to our main branch onto our local//
 
 ## Working a new feature = checking out a new branch 
 // to preserve the state of the master branch to not edit and potentially mess it up --> Switch to a nex branch 
 
-* git checkout -b INSERT_BRANCH_NAME *
+* git checkout -b INSERT_BRANCH_NAME 
 
 //After changes
 
