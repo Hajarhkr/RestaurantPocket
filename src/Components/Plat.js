@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Form, Button, Col, FormGroup } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave, faPlusSquare, faUndo } from '@fortawesome/free-solid-svg-icons'
+import { faSave, faPlusSquare, faUndo, faList, faEdit } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import MyToast from './MyToast'
 
@@ -17,12 +17,38 @@ export default class Plat extends Component {
     }
 
     initialState = {
-        nomplat: '', description: '', prix: '', categorie: '', coverPhotoURL: ''
+        id: '', nomplat: '', description: '', prix: '', categorie: '', coverPhotoURL: ''
+    };
+
+    componentDidMount =()=> {
+        const platId = +this.props.match.params.id;
+        if (platId) {
+            this.findPlatById(platId);
+        }
+    }
+
+
+    findPlatById = platId => {
+        axios.get("http://localhost:8080/api/plats/" + platId)
+            .then(response => {
+                if (response.data = !null) {
+                    this.setState({
+                        id: response.data.id,
+                        nomplat: response.data.nomplat,
+                        description: response.data.description,
+                        prix: response.data.prix,
+                        categorie: response.data.categorie,
+                        coverPhotoURL: response.data.coverPhotoURL,
+                    });
+                }
+            }).catch((error) => {
+                console.error("error-" + error)
+            });
     }
 
     resetPlat = () => {
         this.setState(() => this.initialState);
-    }
+    };
 
 
     submitPlat = event => {
@@ -39,14 +65,14 @@ export default class Plat extends Component {
         axios.post("http://localhost:8080/api/plats", plat)
             .then(response => {
                 if (response.data != null) {
-                    this.setState({"show":true})
-                    setTimeout(()=> this.setState({"show":false}), 3000);
-                } else{
-                    this.setState({"show":false})
+                    this.setState({ "show": true, "methode":"post" })
+                    setTimeout(() => this.setState({ "show": false }), 3000);
+                } else {
+                    this.setState({ "show": false })
                 }
             });
         this.setState(this.initialState);
-    }
+    };
 
     platChange = event => {
 
@@ -55,17 +81,48 @@ export default class Plat extends Component {
         });
     };
 
+    updatePlat = event =>{
+        event.preventDefault();
+
+        const plat = {
+            id:this.state.id,
+            nomplat: this.state.nomplat,
+            description: this.state.description,
+            prix: this.state.prix,
+            categorie: this.state.categorie,
+            coverPhotoURL: this.state.coverPhotoURL
+        };
+
+        axios.put("http://localhost:8080/api/plats", plat)
+            .then(response => {
+                if (response.data != null) {
+                    this.setState({ "show": true, "method":"put"})
+                    setTimeout(() => this.setState({ "show": false }), 3000);
+                    setTimeout(() => this.platList(), 3000);
+                } else {
+                    this.setState({ "show": false })
+                }
+            });
+        this.setState(this.initialState);
+    }
+
+
+
+    platList = () => {
+        return this.props.history.push("/list")
+    };
+
 
     render() {
         const { nomplat, categorie, description, prix, coverPhotoURL } = this.state;
         return (
             <div>
-                <div style={{ "display": this.state.show ? "block" : "none"}}>
-                    <MyToast children= {{show: this.state.show, message: "Plat enregistré.", type:"success"}} />
+                <div style={{ "display": this.state.show ? "block" : "none" }}>
+                    <MyToast show={this.state.show} message={this.state.method === "put" ? "Plat modifié avec succés": "Plat enregistrée"} type={"success"} />
                 </div>
                 <Card style={CardColor}>
-                    <Card.Header><FontAwesomeIcon icon={faPlusSquare} /> Ajouter un Plat</Card.Header>
-                    <Form onReset={this.resetPlat} onSubmit={this.submitPlat} id="MenuFormId">
+                    <Card.Header><FontAwesomeIcon icon={this.state.id ? faEdit: faPlusSquare} />{' '}{this.state.id ? "Modifier ce plat": "Ajouter un Plat"}</Card.Header>
+                    <Form onReset={this.resetPlat} onSubmit={this.state.id ? this.updatePlat : this.submitPlat} id="MenuFormId">
                         <Card.Body>
 
 
@@ -123,10 +180,10 @@ export default class Plat extends Component {
 
                                     <Form.Control
                                         type="text" name="coverPhotoURL"
-                                        value={this.state.coverPhotoURL}
+                                        value={coverPhotoURL}
                                         onChange={this.platChange}
                                         className={"bg-light text-dark"}
-                                        placeholder="Enter Book Cover Photo URL" />
+                                        placeholder="Entrer l'url de la photo de couverture du plat" />
 
                                 </Form.Group>
                             </Form.Row>
@@ -136,13 +193,20 @@ export default class Plat extends Component {
                                 size="sm"
                                 variant="success"
                                 type="submit">
-                                <FontAwesomeIcon icon={faSave} />{' '}Ajouter
+                                <FontAwesomeIcon icon={faSave} />{' '}{this.state.id ? "Update": "Ajouter"}
                     </Button>{' '}
                             <Button
                                 size="sm"
                                 variant="info"
                                 type="reset">
                                 <FontAwesomeIcon icon={faUndo} />{' '}Reset
+                    </Button>{' '}
+                            <Button
+                                size="sm"
+                                variant="info"
+                                type="button"
+                                onClick={this.platList.bind()}>
+                                <FontAwesomeIcon icon={faList} />{' '} Liste de Plat
                     </Button>
                         </Card.Footer>
 

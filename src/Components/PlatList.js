@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faList, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import MyToast from './MyToast'
+import {Link} from 'react-router-dom'
 
 const TableColor = { backgroundColor: '#FFFFFF' };
 const CardColor = { backgroundColor: '#f7f6e7' };
@@ -56,7 +57,7 @@ export default class PlatList extends Component {
             <div>
                 <div>
                 <div style={{ "display": this.state.show ? "block" : "none"}}>
-                    <MyToast children= {{show: this.state.show, message: "Supprimé avec succes.", type:"danger"}} />
+                    <MyToast show={this.state.show} message={"Supprimé avec succés."} type={"danger"} />
                 </div>
                 <Card style={CardColor}>
                 <Card.Header><FontAwesomeIcon icon={faList} />  Liste de Plats</Card.Header>
@@ -88,7 +89,7 @@ export default class PlatList extends Component {
                                         <td>{plat.prix} DH</td>
                                         <td>
                                             <ButtonGroup>
-                                                <Button size="sm" variant="outline-primary"><FontAwesomeIcon icon={faEdit} /></Button>
+                                            <Link to={"edit/"+plat.id} className="btn btn-sn btn-outline-primary"><FontAwesomeIcon icon={faEdit} /></Link>
                                                 <Button size="sm" variant="outline-danger" onClick={this.deletePlat.bind(this, plat.id)}><FontAwesomeIcon icon={faTrash} /></Button>
                                             </ButtonGroup>
                                         </td>

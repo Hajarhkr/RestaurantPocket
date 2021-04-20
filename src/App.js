@@ -30,6 +30,7 @@ function App() {
               
               <Route path="/" exact component={Welcome}/>
               <Route path="/add" exact component={Plat}/>
+              <Route path="/edit/:id" exact component={Plat}/>
               <Route path="/list" exact component={PlatList}/>
               <Route path="/Home" exact component={Home}/>
               <Route path="/Qr" exact component={Qr}/>
