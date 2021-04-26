@@ -17,7 +17,7 @@ export default class Plat extends Component {
     };
 
     initialState = {
-        platId: '', nomplat: '', description: '', prix: '', categorie: '', coverPhotoURL: ''
+        id: '', nomplat: '', description: '', prix: '', categorie: '', coverPhotoURL: ''
     };
 
     componentDidMount = () => {
@@ -27,42 +27,42 @@ export default class Plat extends Component {
         }
     }
 
-    findPlatById = platId => {
-        fetch("http://localhost:8080/api/plats/" + platId)
-            .then(response =>response.json())
-            .then((plat) => {
-                if (plat = !null) {
-                    this.setState({
-                        id: plat.id,
-                        nomplat: plat.nomplat,
-                        description: plat.description,
-                        prix: plat.prix,
-                        categorie: plat.categorie,
-                        coverPhotoURL: plat.coverPhotoURL,
-                    });
-                }
-            }).catch((error) => {
-                console.error("error-" + error)
-            });
-    }
-
     // findPlatById = platId => {
-    //     axios.get("http://localhost:8080/api/plats/" + platId)
-    //         .then(response => {
-    //             if (response.data = !null) {
+    //     fetch("http://localhost:8080/api/plats/" + platId)
+    //         .then(response => response.json())
+    //         .then((plat) => {
+    //             if (plat = !null) {
     //                 this.setState({
-    //                     id: response.data.id,
-    //                     nomplat: response.data.nomplat,
-    //                     description: response.data.description,
-    //                     prix: response.data.prix,
-    //                     categorie: response.data.categorie,
-    //                     coverPhotoURL: response.data.coverPhotoURL,
+    //                     id: plat.id,
+    //                     nomplat: plat.nomplat,
+    //                     description: plat.description,
+    //                     prix: plat.prix,
+    //                     categorie: plat.categorie,
+    //                     coverPhotoURL: plat.coverPhotoURL,
     //                 });
     //             }
     //         }).catch((error) => {
     //             console.error("error-" + error)
     //         });
     // }
+
+    findPlatById = (platId) => {
+        axios.get("http://localhost:8080/api/plats/" +platId)
+            .then(response => {
+                if (response.data != null) {
+                    this.setState({
+                        id: response.data.id,
+                        nomplat: response.data.nomplat,
+                        description: response.data.description,
+                        prix: response.data.prix,
+                        categorie: response.data.categorie,
+                        coverPhotoURL: response.data.coverPhotoURL,
+                    });
+                }
+            }).catch((error) => {
+                console.error("error-" + error)
+            });
+    }
 
     resetPlat = () => {
         this.setState(() => this.initialState);
@@ -122,7 +122,7 @@ export default class Plat extends Component {
                 }
             });
         this.setState(this.initialState);
-    }
+    };
 
 
 
@@ -218,14 +218,14 @@ export default class Plat extends Component {
                                 variant="info"
                                 type="reset">
                                 <FontAwesomeIcon icon={faUndo} />{' '}Reset
-                    </Button>{' '}
+                           </Button>{' '}
                             <Button
                                 size="sm"
                                 variant="info"
                                 type="button"
                                 onClick={this.platList.bind()}>
                                 <FontAwesomeIcon icon={faList} />{' '} Liste de Plat
-                    </Button>
+                           </Button>
                         </Card.Footer>
 
                     </Form>
