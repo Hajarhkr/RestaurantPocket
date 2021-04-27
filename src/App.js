@@ -7,7 +7,7 @@ import Welcome from './Components/Welcome'
 import Footer from './Components/Footer'
 import Plat from './Components/Plat';
 import PlatList from './Components/PlatList';
-import Home from './Components/Home';
+import Menu from './Components/Menu';
 import Bilan from './Components/Bilan';
 import Qr from './Components/Qr';
 import Login from "./Components/login";
@@ -15,6 +15,7 @@ import Login from "./Components/login";
 import Chef from "./Components/Chef";
 
 import "./Components/globale";
+import axios from 'axios';
 
 const authentication = {
   getLogInStatus() {
@@ -22,6 +23,17 @@ const authentication = {
   },
 };
 
+// const checkLoginStatus = () => {
+//   axios.get("http://localhost8080/authenticate", { withCredentials: true })
+//     .then(response => {
+//       console.log("logged in?", response)
+//     }).catch(error => {
+//       console.log("check login error", error)
+//     })
+// };
+//  const compounentDidMount = () => {
+//   this.checkLoginStatus();
+// };
 
 
 
@@ -69,7 +81,7 @@ const App = () => {
               <Route path="/add" exact component={Plat} />
               <Route path="/edit/:id" exact component={Plat} />
               <Route path="/list" exact component={PlatList} />
-              <Route path="/Home" exact component={Home} />
+              <Route path="/Home" exact component={Menu} />
               <Route path="/Qr" exact component={Qr} />
               <Route path="/Bilan" exact component={Bilan} />
 

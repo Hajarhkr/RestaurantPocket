@@ -114,7 +114,7 @@ export default class Plat extends Component {
         axios.put("http://localhost:8080/api/plats", plat)
             .then(response => {
                 if (response.data != null) {
-                    this.setState({ "show": true, "method": "put" })
+                    this.setState({ "show": true})
                     setTimeout(() => this.setState({ "show": false }), 3000);
                     setTimeout(() => this.platList(), 3000);
                 } else {
@@ -136,7 +136,7 @@ export default class Plat extends Component {
         return (
             <div>
                 <div style={{ "display": this.state.show ? "block" : "none" }}>
-                    <MyToast show={this.state.show} message={this.state.method === "put" ? "Plat modifié avec succés" : "Plat enregistrée"} type={"success"} />
+                    <MyToast show={this.state.show} message={this.state.id ? "Plat modifié avec succés" : "Plat enregistré"} type={"success"} />
                 </div>
                 <Card style={CardColor}>
                     <Card.Header><FontAwesomeIcon icon={this.state.id ? faEdit : faPlusSquare} />{' '}{this.state.id ? "Modifier ce plat" : "Ajouter un Plat"}</Card.Header>
