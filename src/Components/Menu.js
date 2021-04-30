@@ -5,7 +5,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import logo from "./images/logo.png";
 import MenuService from "../services/menu.service";
-import "./global";
+import "./globale";
 class Menu extends Component {
   state = {
     menu: [],
