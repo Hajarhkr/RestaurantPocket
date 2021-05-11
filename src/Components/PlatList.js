@@ -5,6 +5,7 @@ import { faList, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import MyToast from './MyToast'
 import { Link } from 'react-router-dom'
+import './globale'
 
 const TableColor = { backgroundColor: '#FFFFFF' };
 const CardColor = { backgroundColor: '#f7f6e7' };
@@ -23,22 +24,22 @@ export default class PlatList extends Component {
     }
 
     findAllPlats() {
-        axios.get("http://localhost:8080/api/plats")
+        axios.get("http://localhost:8080/api/menus/qr/" + global.qr)
             .then(response => response.data)
             .then((data) =>
                 this.setState({ plats: data }));
     }
 
 
-    deletePlat = (platId) => {
-        axios.delete("http://localhost:8080/api/plats/" + platId)
+    deletePlat = (idrepas) => {
+        axios.delete("http://localhost:8080/api/menus/" + idrepas)
             .then(response => {
                 if (response.data != null) {
                     this.setState({ "show": true })
                     setTimeout(() => this.setState({ "show": false }), 3000);
 
                     this.setState({
-                        plats: this.state.plats.filter(plat => plat.id !== platId)
+                        plats: this.state.plats.filter(plat => plat.id !== idrepas)
                     });
                 } else {
                     this.setState({ "show": false })
@@ -81,8 +82,8 @@ export default class PlatList extends Component {
                                         this.state.plats.map((plat) => (
                                             <tr key={plat.id}>
                                                 <td>
-                                                    <Image src={plat.coverPhotoURL} rounded width="25" height="25" />{' '}
-                                                    {plat.nomplat}
+                                                    <Image src={plat.image} rounded width="25" height="25" />{' '}
+                                                    {plat.nomrepas}
                                                 </td>
                                                 <td>{plat.categorie}</td>
                                                 <td>{plat.description}</td>

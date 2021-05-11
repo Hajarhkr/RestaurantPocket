@@ -11,6 +11,7 @@ import Menu from './Components/Menu';
 import Bilan from './Components/Bilan';
 import Qr from './Components/Qr';
 import Login from "./Components/login";
+import Categorie from "./Components/Categorie";
 
 import Chef from "./Components/Chef";
 
@@ -84,6 +85,7 @@ const App = () => {
               <Route path="/Home" exact component={Menu} />
               <Route path="/Qr" exact component={Qr} />
               <Route path="/Bilan" exact component={Bilan} />
+              <Route path="/categorie" exact component={Categorie} />
 
 
             </Switch>

@@ -1,7 +1,7 @@
 global.logdin = false;
 global.email = "";
-global.qr = "";
 global.namerestaut = "";
 global.code = "";
-global.qr = "";
+global.qr = "10";
 global.menu = [];
+global.categorie = [];

@@ -23,7 +23,7 @@ export default class NavigationBar extends Component {
                         <NavDropdown title="Menu" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="add">Ajouter Plat</NavDropdown.Item>
                             <NavDropdown.Item  href="list">Liste de plat</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                            <NavDropdown.Item href="categorie">Ajouter Catégorie</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown>

@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave, faPlusSquare, faUndo, faList, faEdit } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import MyToast from './MyToast'
+import './globale'
 
 const CardColor = { backgroundColor: '#f7f6e7' };
 
 export default class Plat extends Component {
+
     constructor(props) {
         super(props);
         this.state = this.initialState;
@@ -17,7 +19,7 @@ export default class Plat extends Component {
     };
 
     initialState = {
-        id: '', nomplat: '', description: '', prix: '', categorie: '', coverPhotoURL: ''
+        id: '', nomrepas: '', description: '', prix: '', categorie: '', image: ''
     };
 
     componentDidMount = () => {
@@ -25,6 +27,26 @@ export default class Plat extends Component {
         if (platId) {
             this.findPlatById(platId);
         }
+    }
+    componentDidMount = () => {
+        axios.get("http://localhost:8080/api/categorie/qr/" + global.qr)
+            .then((response) => {
+                const listCategorie = response.data;
+                this.setState({ listCategorie });
+                global.categorie = listCategorie;
+                console.log(global.categorie);
+            },
+                (error) => {
+                    this.setState({
+                        content:
+                            (error.response &&
+                                error.response.data &&
+                                error.response.data.message) ||
+                            error.message ||
+                            error.toString(),
+                    });
+                }
+            );
     }
 
     // findPlatById = platId => {
@@ -34,7 +56,7 @@ export default class Plat extends Component {
     //             if (plat = !null) {
     //                 this.setState({
     //                     id: plat.id,
-    //                     nomplat: plat.nomplat,
+    //                     nomrepas: plat.nomrepas,
     //                     description: plat.description,
     //                     prix: plat.prix,
     //                     categorie: plat.categorie,
@@ -46,17 +68,19 @@ export default class Plat extends Component {
     //         });
     // }
 
+
+
     findPlatById = (platId) => {
-        axios.get("http://localhost:8080/api/plats/" +platId)
+        axios.get("http://localhost:8080/api/menus/" + platId)
             .then(response => {
                 if (response.data != null) {
                     this.setState({
                         id: response.data.id,
-                        nomplat: response.data.nomplat,
+                        nomrepas: response.data.nomrepas,
                         description: response.data.description,
                         prix: response.data.prix,
                         categorie: response.data.categorie,
-                        coverPhotoURL: response.data.coverPhotoURL,
+                        image: response.data.image,
                     });
                 }
             }).catch((error) => {
@@ -68,19 +92,29 @@ export default class Plat extends Component {
         this.setState(() => this.initialState);
     };
 
+    allcategorie = (event) => {
+        event.map((resultatone) => (
+            <option>{resultatone.categorie}</option>
+        )
+
+
+        )
+        console.log("hello")
+    }
 
     submitPlat = event => {
         event.preventDefault();
 
         const plat = {
-            nomplat: this.state.nomplat,
+            nomrepas: this.state.nomrepas,
             description: this.state.description,
             prix: this.state.prix,
             categorie: this.state.categorie,
-            coverPhotoURL: this.state.coverPhotoURL
+            image: this.state.image,
+            qr: global.qr,
         };
 
-        axios.post("http://localhost:8080/api/plats", plat)
+        axios.post("http://localhost:8080/api/menus", plat)
             .then(response => {
                 if (response.data != null) {
                     this.setState({ "show": true, "methode": "post" })
@@ -90,13 +124,16 @@ export default class Plat extends Component {
                 }
             });
         this.setState(this.initialState);
+        console.log(plat);
     };
 
     platChange = event => {
 
         this.setState({
             [event.target.name]: event.target.value
+
         });
+        console.log(event.target.value);
     };
 
     updatePlat = event => {
@@ -104,17 +141,17 @@ export default class Plat extends Component {
 
         const plat = {
             id: this.state.id,
-            nomplat: this.state.nomplat,
+            nomrepas: this.state.nomrepas,
             description: this.state.description,
             prix: this.state.prix,
             categorie: this.state.categorie,
-            coverPhotoURL: this.state.coverPhotoURL
+            image: this.state.image
         };
 
-        axios.put("http://localhost:8080/api/plats", plat)
+        axios.put("http://localhost:8080/api/menus", plat)
             .then(response => {
                 if (response.data != null) {
-                    this.setState({ "show": true})
+                    this.setState({ "show": true })
                     setTimeout(() => this.setState({ "show": false }), 3000);
                     setTimeout(() => this.platList(), 3000);
                 } else {
@@ -122,6 +159,7 @@ export default class Plat extends Component {
                 }
             });
         this.setState(this.initialState);
+        console.log(plat)
     };
 
 
@@ -132,7 +170,7 @@ export default class Plat extends Component {
 
 
     render() {
-        const { nomplat, categorie, description, prix, coverPhotoURL } = this.state;
+        const { nomrepas, categorie, description, prix, image } = this.state;
         return (
             <div>
                 <div style={{ "display": this.state.show ? "block" : "none" }}>
@@ -145,11 +183,11 @@ export default class Plat extends Component {
 
 
                             <Form.Row>
-                                <Form.Group as={Col} controlId="formGridNomplat">
+                                <Form.Group as={Col} controlId="formGridnomrepas">
                                     <Form.Label>Nom:*</Form.Label>
                                     <Form.Control required autoComplete="off"
-                                        type="text" name="nomplat"
-                                        value={nomplat}
+                                        type="text" name="nomrepas"
+                                        value={nomrepas}
                                         onChange={this.platChange}
                                         className="bg-light text-dark"
                                         placeholder="Entrer le nom du plat" />
@@ -174,7 +212,7 @@ export default class Plat extends Component {
                                         className="bg-light text-dark"
                                         placeholder="Le prix en DH" />
                                 </Form.Group>
-                                <Form.Group as={Col} controlId="formGridCategorie">
+                                {/* <Form.Group as={Col} controlId="formGridCategorie">
                                     <Form.Label>Catégorie:</Form.Label>
                                     <Form.Control required autoComplete="off"
                                         type="text" name="categorie"
@@ -182,14 +220,23 @@ export default class Plat extends Component {
                                         onChange={this.platChange}
                                         className="bg-light text-dark"
                                         placeholder="catégorie" />
-                                </Form.Group>
-                                {/* <FormGroup as={Col}>
-                            <Form.Label>Catégorie:</Form.Label>
-                            <Form.Control as="select" placeholder="Choisir une catégorie">
-                                <option>Plat principal</option>
-                                <option>Dessert</option>
-                            </Form.Control>
-                        </FormGroup> */}
+                                </Form.Group> */}
+                                <FormGroup as={Col}>
+                                    <Form.Label>Catégorie:</Form.Label>
+                                    <Form.Control
+                                        as="select"
+                                        name="categorie"
+                                        id="inputGroupSelect04"
+                                        value={this.state.categorie}
+                                        onChange={this.platChange}
+                                        >
+                                        {global.categorie.map((resultatone) => (
+                                            <option>{resultatone.categorie}</option>
+                                        )
+                                        )}
+                                       
+                                    </Form.Control>
+                                </FormGroup>
 
                             </Form.Row>
                             <Form.Row>
@@ -197,8 +244,8 @@ export default class Plat extends Component {
                                     <Form.Label>Cover Photo URL</Form.Label>
 
                                     <Form.Control
-                                        type="text" name="coverPhotoURL"
-                                        value={coverPhotoURL}
+                                        type="text" name="image"
+                                        value={image}
                                         onChange={this.platChange}
                                         className={"bg-light text-dark"}
                                         placeholder="Entrer l'url de la photo de couverture du plat" />
