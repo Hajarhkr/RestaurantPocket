@@ -229,12 +229,12 @@ export default class Plat extends Component {
                                         id="inputGroupSelect04"
                                         value={this.state.categorie}
                                         onChange={this.platChange}
-                                        >
+                                    >
                                         {global.categorie.map((resultatone) => (
                                             <option>{resultatone.categorie}</option>
                                         )
                                         )}
-                                       
+
                                     </Form.Control>
                                 </FormGroup>
 
@@ -278,6 +278,7 @@ export default class Plat extends Component {
                     </Form>
 
                 </Card>
+                
             </div>
 
 

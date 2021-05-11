@@ -96,7 +96,7 @@ const App = () => {
       </Container>
 
 
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   )
 

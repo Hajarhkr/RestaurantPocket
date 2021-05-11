@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Button, ButtonGroup, Card, Table, Image } from 'react-bootstrap'
+import { Button, ButtonGroup, Card, Table, Image, InputGroup, FormControl } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faList, faTrash, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faList, faTrash, faEdit, faStepBackward, faFastForward, faFastBackward, faStepForward } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import MyToast from './MyToast'
 import { Link } from 'react-router-dom'
@@ -15,7 +15,10 @@ export default class PlatList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            plats: []
+            plats: [],
+            currentPage: 1,
+            platPerPage: 4
+
         }
     }
 
@@ -49,10 +52,65 @@ export default class PlatList extends Component {
             )
     };
 
+    changePage = event => {
+        this.setState({
+            [event.target.name]: parseInt(event.target.value)
+        });
+    };
+
+    firstPage = () => {
+        if (this.state.currentPage > 1) {
+            this.setState({
+                currentPage: 1
+            });
+        }
+    };
+
+    prevPage = () => {
+        if (this.state.currentPage > 1) {
+            this.setState({
+                currentPage: this.state.currentPage - 1
+            });
+        }
+    };
+
+    lastPage = () => {
+        if (this.state.currentPage < Math.ceil(this.state.plats.length / this.state.platPerPage)) {
+            this.setState({
+                currentPage: Math.ceil(this.state.plats.length / this.state.platPerPage)
+            });
+        }
+
+
+    };
+
+    nextPage = () => {
+        if (this.state.currentPage < Math.ceil(this.state.plats.length / this.state.platPerPage)) {
+            this.setState({
+                currentPage: this.state.currentPage + 1
+            });
+        }
+
+    };
+
+
 
 
     render() {
 
+        const { plats, currentPage, platPerPage } = this.state;
+        const lastIndex = currentPage * platPerPage;
+        const firstIndex = lastIndex - platPerPage;
+        const currentPlats = plats.slice(firstIndex, lastIndex);
+        const totalPages = plats.length / platPerPage;
+
+        const pageNumCss = {
+            width: "45px",
+            border: "1px solid #17A288 ",
+            color: "#17A288",
+            textAlign: "center",
+            fontWeight: "bold"
+        }
 
         return (
             <div>
@@ -74,12 +132,12 @@ export default class PlatList extends Component {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {this.state.plats.length === 0 ?
+                                    {plats.length === 0 ?
                                         <tr align="center">
                                             <td colSpan="5"> {this.state.plats.length} plats enregistrés</td>
 
                                         </tr> :
-                                        this.state.plats.map((plat) => (
+                                        currentPlats.map((plat) => (
                                             <tr key={plat.id}>
                                                 <td>
                                                     <Image src={plat.image} rounded width="25" height="25" />{' '}
@@ -101,7 +159,60 @@ export default class PlatList extends Component {
 
                             </Table>
                         </Card.Body>
+                        <Card.Footer>
+                            <div style={{ float: "left" }}>
+                                Showing Page {currentPage} of {totalPages}
+                            </div>
+                            <div style={{ float: "right" }}>
+                                <InputGroup size="sm">
+
+                                    <InputGroup.Prepend>
+                                        <Button
+                                            type="button"
+                                            variant="outline-info"
+                                            disabled={currentPage == 1 ? true : false}
+                                            onClick={this.firstPage}>
+                                            <FontAwesomeIcon icon={faFastBackward} />{' '}First
+                                        </Button>
+                                        <Button
+                                            type="button"
+                                            variant="outline-info"
+                                            disabled={currentPage == 1 ? true : false}
+                                            onClick={this.prevPage}>
+                                            <FontAwesomeIcon icon={faStepBackward} />{' '}Prev
+                                         </Button>
+                                    </InputGroup.Prepend>
+
+                                    <FormControl
+                                        style={pageNumCss}
+                                        name="currentPage"
+                                        value={currentPage}
+                                        onChange={this.changePage} />
+
+                                    <InputGroup.Append>
+                                        <Button
+                                            type="button"
+                                            variant="outline-info"
+                                            disabled={currentPage == totalPages ? true : false}
+                                            onClick={this.nextPage}>
+                                            <FontAwesomeIcon icon={faStepForward} />{' '}Next
+                                        </Button>
+                                        <Button
+                                            type="button"
+                                            variant="outline-info"
+                                            disabled={currentPage == totalPages ? true : false}
+                                            onClick={this.lastPage}>
+                                            <FontAwesomeIcon icon={faFastForward} />{' '}Last
+                                          </Button>
+                                    </InputGroup.Append>
+
+                                </InputGroup>
+
+                            </div>
+
+                        </Card.Footer>
                     </Card>
+
                 </div>
             </div>
 
