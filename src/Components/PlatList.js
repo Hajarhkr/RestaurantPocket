@@ -1,16 +1,19 @@
-import React, { Component } from 'react'
-import { Button, ButtonGroup, Card, Table, Image, InputGroup, FormControl } from 'react-bootstrap'
+import React, { Component, state } from 'react'
+import { connect } from 'react-redux'
+import { fetchPlats } from '../services/Plat/platActions'
+import { Button, ButtonGroup, Card, Table, Image, InputGroup, FormControl, Alert } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faList, faTrash, faEdit, faStepBackward, faFastForward, faFastBackward, faStepForward } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
+
 import MyToast from './MyToast'
 import { Link } from 'react-router-dom'
 import './globale'
+import axios from 'axios'
 
 const TableColor = { backgroundColor: '#FFFFFF' };
 const CardColor = { backgroundColor: '#f7f6e7' };
 
-export default class PlatList extends Component {
+class PlatList extends Component {
 
     constructor(props) {
         super(props);
@@ -23,15 +26,16 @@ export default class PlatList extends Component {
     }
 
     componentDidMount() {
-        this.findAllPlats();
+        //this.findAllPlats();
+        this.props.fetchPlats();
     }
 
-    findAllPlats() {
-        axios.get("http://localhost:8080/api/menus/qr/" + global.qr)
-            .then(response => response.data)
-            .then((data) =>
-                this.setState({ plats: data }));
-    }
+    // findAllPlats() {
+    //     axios.get("http://localhost:8080/api/menus/qr/" + global.qr)
+    //         .then(response => response.data)
+    //         .then((data) =>
+    //             this.setState({ plats: data }));
+    // }
 
 
     deletePlat = (idrepas) => {
@@ -75,9 +79,10 @@ export default class PlatList extends Component {
     };
 
     lastPage = () => {
-        if (this.state.currentPage < Math.ceil(this.state.plats.length / this.state.platPerPage)) {
+        let platsLength = this.props.platData.plats.length
+        if (this.state.currentPage < Math.ceil(platsLength / this.state.platPerPage)) {
             this.setState({
-                currentPage: Math.ceil(this.state.plats.length / this.state.platPerPage)
+                currentPage: Math.ceil(platsLength / this.state.platPerPage)
             });
         }
 
@@ -85,7 +90,7 @@ export default class PlatList extends Component {
     };
 
     nextPage = () => {
-        if (this.state.currentPage < Math.ceil(this.state.plats.length / this.state.platPerPage)) {
+        if (this.state.currentPage < Math.ceil(this.props.platData.plats.length / this.state.platPerPage)) {
             this.setState({
                 currentPage: this.state.currentPage + 1
             });
@@ -98,9 +103,12 @@ export default class PlatList extends Component {
 
     render() {
 
-        const { plats, currentPage, platPerPage } = this.state;
+        const {  currentPage, platPerPage } = this.state;
         const lastIndex = currentPage * platPerPage;
         const firstIndex = lastIndex - platPerPage;
+
+        const platData = this.props.platData;
+        const plats = platData.plats;
         const currentPlats = plats.slice(firstIndex, lastIndex);
         const totalPages = plats.length / platPerPage;
 
@@ -114,109 +122,132 @@ export default class PlatList extends Component {
 
         return (
             <div>
-                <div>
-                    <div style={{ "display": this.state.show ? "block" : "none" }}>
-                        <MyToast show={this.state.show} message={"Supprimé avec succés."} type={"danger"} />
+                {platData.error ?
+                    <Alert variant="danger">
+                        {platData.error}
+                    </Alert> :
+                    <div>
+                        <div style={{ "display": this.state.show ? "block" : "none" }}>
+                            <MyToast show={this.state.show} message={"Supprimé avec succés."} type={"danger"} />
+                        </div>
+                        <Card style={CardColor}>
+                            <Card.Header><FontAwesomeIcon icon={faList} />  Liste de Plats</Card.Header>
+                            <Card.Body>
+                                <Table border hover striped variant="light" style={TableColor}>
+                                    <thead>
+                                        <tr>
+                                            <th>Plat</th>
+                                            <th>Catégorie</th>
+                                            <th>Description</th>
+                                            <th>Prix</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {plats.length === 0 ?
+                                            <tr align="center">
+                                                <td colSpan="5"> {this.state.plats.length} plats enregistrés</td>
+
+                                            </tr> :
+                                            currentPlats.map((plat) => (
+                                                <tr key={plat.id}>
+                                                    <td>
+                                                        <Image src={plat.image} rounded width="25" height="25" />{' '}
+                                                        {plat.nomrepas}
+                                                    </td>
+                                                    <td>{plat.categorie}</td>
+                                                    <td>{plat.description}</td>
+                                                    <td>{plat.prix} DH</td>
+                                                    <td>
+                                                        <ButtonGroup>
+                                                            <Link to={"edit/" + plat.id} className="btn btn-sm btn-outline-primary"><FontAwesomeIcon icon={faEdit} /></Link>
+                                                            <Button size="sm" variant="outline-danger" onClick={this.deletePlat.bind(this, plat.id)}><FontAwesomeIcon icon={faTrash} /></Button>
+                                                        </ButtonGroup>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        }
+                                    </tbody>
+
+                                </Table>
+                            </Card.Body>
+                            <Card.Footer>
+                                <div style={{ float: "left" }}>
+                                    Showing Page {currentPage} of {totalPages}
+                                </div>
+                                <div style={{ float: "right" }}>
+                                    <InputGroup size="sm">
+
+                                        <InputGroup.Prepend>
+                                            <Button
+                                                type="button"
+                                                variant="outline-info"
+                                                disabled={currentPage == 1 ? true : false}
+                                                onClick={this.firstPage}>
+                                                <FontAwesomeIcon icon={faFastBackward} />{' '}First
+                                    </Button>
+                                            <Button
+                                                type="button"
+                                                variant="outline-info"
+                                                disabled={currentPage == 1 ? true : false}
+                                                onClick={this.prevPage}>
+                                                <FontAwesomeIcon icon={faStepBackward} />{' '}Prev
+                                     </Button>
+                                        </InputGroup.Prepend>
+
+                                        <FormControl
+                                            style={pageNumCss}
+                                            name="currentPage"
+                                            value={currentPage}
+                                            onChange={this.changePage} />
+
+                                        <InputGroup.Append>
+                                            <Button
+                                                type="button"
+                                                variant="outline-info"
+                                                disabled={currentPage == totalPages ? true : false}
+                                                onClick={this.nextPage}>
+                                                <FontAwesomeIcon icon={faStepForward} />{' '}Next
+                                    </Button>
+                                            <Button
+                                                type="button"
+                                                variant="outline-info"
+                                                disabled={currentPage == totalPages ? true : false}
+                                                onClick={this.lastPage}>
+                                                <FontAwesomeIcon icon={faFastForward} />{' '}Last
+                                      </Button>
+                                        </InputGroup.Append>
+
+                                    </InputGroup>
+
+                                </div>
+
+                            </Card.Footer>
+                        </Card>
+
                     </div>
-                    <Card style={CardColor}>
-                        <Card.Header><FontAwesomeIcon icon={faList} />  Liste de Plats</Card.Header>
-                        <Card.Body>
-                            <Table border hover striped variant="light" style={TableColor}>
-                                <thead>
-                                    <tr>
-                                        <th>Plat</th>
-                                        <th>Catégorie</th>
-                                        <th>Description</th>
-                                        <th>Prix</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {plats.length === 0 ?
-                                        <tr align="center">
-                                            <td colSpan="5"> {this.state.plats.length} plats enregistrés</td>
+                }
 
-                                        </tr> :
-                                        currentPlats.map((plat) => (
-                                            <tr key={plat.id}>
-                                                <td>
-                                                    <Image src={plat.image} rounded width="25" height="25" />{' '}
-                                                    {plat.nomrepas}
-                                                </td>
-                                                <td>{plat.categorie}</td>
-                                                <td>{plat.description}</td>
-                                                <td>{plat.prix} DH</td>
-                                                <td>
-                                                    <ButtonGroup>
-                                                        <Link to={"edit/" + plat.id} className="btn btn-sm btn-outline-primary"><FontAwesomeIcon icon={faEdit} /></Link>
-                                                        <Button size="sm" variant="outline-danger" onClick={this.deletePlat.bind(this, plat.id)}><FontAwesomeIcon icon={faTrash} /></Button>
-                                                    </ButtonGroup>
-                                                </td>
-                                            </tr>
-                                        ))
-                                    }
-                                </tbody>
-
-                            </Table>
-                        </Card.Body>
-                        <Card.Footer>
-                            <div style={{ float: "left" }}>
-                                Showing Page {currentPage} of {totalPages}
-                            </div>
-                            <div style={{ float: "right" }}>
-                                <InputGroup size="sm">
-
-                                    <InputGroup.Prepend>
-                                        <Button
-                                            type="button"
-                                            variant="outline-info"
-                                            disabled={currentPage == 1 ? true : false}
-                                            onClick={this.firstPage}>
-                                            <FontAwesomeIcon icon={faFastBackward} />{' '}First
-                                        </Button>
-                                        <Button
-                                            type="button"
-                                            variant="outline-info"
-                                            disabled={currentPage == 1 ? true : false}
-                                            onClick={this.prevPage}>
-                                            <FontAwesomeIcon icon={faStepBackward} />{' '}Prev
-                                         </Button>
-                                    </InputGroup.Prepend>
-
-                                    <FormControl
-                                        style={pageNumCss}
-                                        name="currentPage"
-                                        value={currentPage}
-                                        onChange={this.changePage} />
-
-                                    <InputGroup.Append>
-                                        <Button
-                                            type="button"
-                                            variant="outline-info"
-                                            disabled={currentPage == totalPages ? true : false}
-                                            onClick={this.nextPage}>
-                                            <FontAwesomeIcon icon={faStepForward} />{' '}Next
-                                        </Button>
-                                        <Button
-                                            type="button"
-                                            variant="outline-info"
-                                            disabled={currentPage == totalPages ? true : false}
-                                            onClick={this.lastPage}>
-                                            <FontAwesomeIcon icon={faFastForward} />{' '}Last
-                                          </Button>
-                                    </InputGroup.Append>
-
-                                </InputGroup>
-
-                            </div>
-
-                        </Card.Footer>
-                    </Card>
-
-                </div>
             </div>
 
         )
     }
 
 }
+
+const mapStateToProps = state => {
+    return {
+        platData: state.plat
+    }
+
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchPlats: () => dispatch(fetchPlats())
+    }
+
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlatList);

@@ -1,6 +1,8 @@
 
 import { Container, Row, Jumbotron, Col } from 'react-bootstrap';
 import './App.css';
+import { Provider } from 'react-redux'
+import store from './services/store'
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import NavigationBar from './Components/NavigationBar'
 import Welcome from './Components/Welcome'
@@ -81,7 +83,10 @@ const App = () => {
               <Route path="/Welcome" exact component={Welcome} />
               <Route path="/add" exact component={Plat} />
               <Route path="/edit/:id" exact component={Plat} />
-              <Route path="/list" exact component={PlatList} />
+              <Route
+                path="/list"
+                exact component={() =>
+                  <Provider store={store}><PlatList /></Provider>} />
               <Route path="/Home" exact component={Menu} />
               <Route path="/Qr" exact component={Qr} />
               <Route path="/Bilan" exact component={Bilan} />
