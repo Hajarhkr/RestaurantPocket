@@ -139,7 +139,7 @@ export default class Login extends Component {
               </div>
               <div className="inputBx">
                 <p>
-                  Don't have an account?<a href={"/registrer"} className="to_register">{' '}Sign up </a>
+                  Don't have an account?<a href={"/signup"} className="to_register">{' '}Sign up </a>
                   
                 </p>
               </div>

@@ -12,7 +12,7 @@ import Bilan from './Components/Bilan';
 import Qr from './Components/Qr';
 import Login from "./Components/login";
 import Categorie from "./Components/Categorie";
-
+import Signup from "./Components/Signup";
 import Chef from "./Components/Chef";
 
 import "./Components/globale";
@@ -46,7 +46,7 @@ function SecuredRoute(props) {
         authentication.getLogInStatus() ? (
           <props.component {...data}></props.component>
         ) : (
-          <Redirect to={{ pathname: "/" }}></Redirect>
+          <Redirect to={{ pathname: "/login" }}></Redirect>
         )
       }
     ></Route>
@@ -66,7 +66,7 @@ const App = () => {
 
     <Router>
       <NavigationBar />
-      <Route path="/" exact component={Login} />
+      <Route path="/login" exact component={Login} />
       <SecuredRoute path="/choixchef" component={Chef}></SecuredRoute>
 
 
@@ -86,6 +86,7 @@ const App = () => {
               <Route path="/Qr" exact component={Qr} />
               <Route path="/Bilan" exact component={Bilan} />
               <Route path="/categorie" exact component={Categorie} />
+              <Route path="/signup" exact component={Signup} />
 
 
             </Switch>

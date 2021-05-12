@@ -1,5 +1,7 @@
+import { faSignInAlt, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, {Component} from 'react';
-import { Navbar, Nav, NavDropdown, Dropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import {Link} from 'react-router-dom'
 
 const navbar = {backgroundColor: '#c05812cc'};
@@ -8,6 +10,33 @@ const navbar = {backgroundColor: '#c05812cc'};
 export default class NavigationBar extends Component {
     
     render() {
+        const guestLinks = (
+            <>
+            <Nav className="navbar-right">
+                 <Link to={"signup"} className="nav-link"><FontAwesomeIcon icon={faUserPlus}/> Register</Link>
+                 <Link to={"login"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt}/> {' '}Login</Link>
+            </Nav>
+            </>
+
+        );
+        const userLinks = (
+            <>
+            <Nav className="mr-auto">
+                <Link to={"Home"} className="nav-link">Home</Link>
+                <Link to={"Qr"} className="nav-link">Qr</Link>
+                <Link to={"Bilan"} className="nav-link">Bilan</Link>
+                <NavDropdown title="Menu" id="collasible-nav-dropdown">
+                        <NavDropdown.Item href="add">Ajouter Plat</NavDropdown.Item>
+                        <NavDropdown.Item  href="list">Liste de plat</NavDropdown.Item>
+                        <NavDropdown.Item href="categorie">Ajouter Catégorie</NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                </NavDropdown>
+            </Nav>
+            </>
+
+        )
+
         return (
             <Navbar expand="lg" style={navbar} variant="dark">
                 <Link to={"/"} className="navbar-brand">
@@ -29,12 +58,11 @@ export default class NavigationBar extends Component {
                         </NavDropdown>
                         
                     </Nav>
-                    {/* <Nav>
-                        <Nav.Link href="#deets">More deets</Nav.Link>
-                        <Nav.Link eventKey={2} href="#memes">
-                            Dank memes
-                       </Nav.Link>
-                    </Nav> */}
+
+                    <Nav className="navbar-right">
+                         <Link to={"signup"} className="nav-link"><FontAwesomeIcon icon={faUserPlus}/> Register</Link>
+                         <Link to={"login"} className="nav-link"><FontAwesomeIcon icon={faSignInAlt}/> {' '}Login</Link>
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
         );
