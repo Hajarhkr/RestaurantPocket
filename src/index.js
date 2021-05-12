@@ -2,16 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-import { Provider } from 'react-redux'
-import store from './services/store'
+import * as serviceWorker from './serviceWorker.js';
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+import {Provider} from 'react-redux';
+import store from './services/store';
 
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 
-reportWebVitals();
+serviceWorker.unregister();

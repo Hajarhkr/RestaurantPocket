@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { savePlat, fetchPlat, updatePlat } from "../services/Plat/platActions"
+import { savePlat } from "../services/Plat/platActions"
 import { Card, Form, Button, Col, FormGroup, InputGroup, Image } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave, faPlusSquare, faUndo, faList, faEdit } from '@fortawesome/free-solid-svg-icons'
@@ -24,11 +24,11 @@ class Plat extends Component {
     };
 
     initialState = {
-        idrepas: '', nomrepas: '', description: '', prix: '', categorie: '', image: ''
+        id: '', nomrepas: '', description: '', prix: '', categorie: '', image: ''
     };
 
     componentDidMount = () => {
-        const platId = +this.props.match.params.idrepas;
+        const platId = +this.props.match.params.id;
         if (platId) {
             this.findPlatById(platId);
         }
@@ -74,43 +74,44 @@ class Plat extends Component {
             });
     }
 
+    // findPlatById = platId => {
+    //     fetch("http://localhost:8080/api/plats/" + platId)
+    //         .then(response => response.json())
+    //         .then((plat) => {
+    //             if (plat = !null) {
+    //                 this.setState({
+    //                     id: plat.id,
+    //                     nomrepas: plat.nomrepas,
+    //                     description: plat.description,
+    //                     prix: plat.prix,
+    //                     categorie: plat.categorie,
+    //                     coverPhotoURL: plat.coverPhotoURL,
+    //                 });
+    //             }
+    //         }).catch((error) => {
+    //             console.error("error-" + error)
+    //         });
+    // }
 
 
 
     findPlatById = (platId) => {
-        this.props.fetchPlat(platId);
-        setTimeout(() => {
-            let plat = this.props.platObject.plat;
-            if (plat != null) {
-                this.setState({
-                    idrepas: plat.idrepas,
-                    nomrepas: plat.nomrepas,
-                    description: plat.description,
-                    prix: plat.prix,
-                    categorie: plat.categorie,
-                    image: plat.image,
-                    qr:global.qr
-                });
-            }
-            }, 1000 )
-
-
-        // axios.get("http://localhost:8080/api/menus/" + platId)
-        //     .then(response => {
-        //         if (response.data != null) {
-        //             this.setState({
-        //                 id: response.data.id,
-        //                 nomrepas: response.data.nomrepas,
-        //                 description: response.data.description,
-        //                 prix: response.data.prix,
-        //                 categorie: response.data.categorie,
-        //                 image: response.data.image,
-
-        //             });
-        //         }
-        //     }).catch((error) => {
-        //         console.error("error-" + error)
-        //     });
+        axios.get("http://localhost:8080/api/menus/" + platId)
+            .then(response => {
+                if (response.data != null) {
+                    this.setState({
+                        id: response.data.id,
+                        nomrepas: response.data.nomrepas,
+                        description: response.data.description,
+                        prix: response.data.prix,
+                        categorie: response.data.categorie,
+                        image: response.data.image,
+                      
+                    });
+                }
+            }).catch((error) => {
+                console.error("error-" + error)
+            });
     }
 
     resetPlat = () => {
@@ -121,6 +122,7 @@ class Plat extends Component {
         event.map((resultatone) => (
             <option>{resultatone.categorie}</option>
         )
+
 
         )
         console.log("hello")
@@ -208,11 +210,11 @@ class Plat extends Component {
 
 
     render() {
-        const { nomrepas, categorie, description, prix, image, qr } = this.state;
+        const { nomrepas, categorie, description, prix, image, qr} = this.state;
         return (
             <div>
                 <div style={{ "display": this.state.show ? "block" : "none" }}>
-                    <MyToast show={this.state.show} message={this.state.id ? "Plat modifié avec succés" : "Plat enregistré avec success"} type={"success"} />
+                    <MyToast show={this.state.show} message={this.state.id ? "Plat modifié avec succés" : "Plat enregistré"} type={"success"} />
                 </div>
                 <Card style={CardColor}>
                     <Card.Header><FontAwesomeIcon icon={this.state.id ? faEdit : faPlusSquare} />{' '}{this.state.id ? "Modifier ce plat" : "Ajouter un Plat"}</Card.Header>
@@ -280,14 +282,14 @@ class Plat extends Component {
                                 <Form.Group as={Col}>
                                     <Form.Label>Cover Photo URL</Form.Label>
                                     <InputGroup>
-                                        <Form.Control required
+                                        <Form.Control required autoComplete="off"
                                             type="text" name="image"
                                             value={image}
                                             onChange={this.platChange}
                                             className={"bg-light text-dark"}
                                             placeholder="Entrer l'url de la photo de couverture du plat" />
                                         <InputGroup.Append>
-                                            {this.state.image !== '' && <Image src={this.state.image} roundedRight width="40" height="38" />}
+                                            {this.state.image !== '' && <Image src={this.state.image} roundedRight width="40" height="30" />}
                                         </InputGroup.Append>
                                     </InputGroup>
                                 </Form.Group>
@@ -333,8 +335,6 @@ class Plat extends Component {
 const mapStateToProps = state => {
     return {
         savedPlatObject: state.plat,
-        updatedPlatObject: state.plat,
-        platObject: state.plat
 
     };
 
@@ -343,8 +343,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         savePlat: (plat) => dispatch(savePlat(plat)),
-        updatePlat: (platId) => dispatch(updatePlat(platId)),
-        fetchPlat: (plat) => dispatch(fetchPlat(plat)),
 
     }
 

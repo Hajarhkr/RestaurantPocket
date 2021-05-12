@@ -1,19 +1,29 @@
 import axios from 'axios';
-import { FETCH_PLAT_REQUEST, FETCH_PLAT_SUCCESS, FETCH_PLAT_FAILURE } from './platTypes';
+import { FETCH_PLAT_REQUEST, UPDATE_PLAT_REQUEST, PLAT_SUCCESS, PLAT_FAILURE, SAVE_PLAT_REQUEST } from './platTypes';
 import "../../Components/globale"
 
-export const fetchPlats = () => {
+export const savePlat = plat => {
     return dispatch => {
-        dispatch(fetchPlatRequest());
-        axios.get("http://localhost:8080/api/menus/qr/" + global.qr)
+        dispatch(savePlatRequest());
+        axios.post("http://localhost:8080/api/menus", plat)
             .then(response => {
-                dispatch(fetchPlatSuccess(response.data));
+                dispatch(PlatSuccess(response.data));
             })
             .catch(error => {
-                dispatch(fetchPlatFailure(error.message))
+                dispatch(PlatFailure(error.message))
             });
     };
 };
+
+
+const savePlatRequest = () => {
+    return {
+        type: SAVE_PLAT_REQUEST
+    };
+};
+
+
+
 
 const fetchPlatRequest = () => {
     return {
@@ -21,17 +31,50 @@ const fetchPlatRequest = () => {
     };
 };
 
-const fetchPlatSuccess = plats => {
+export const fetchPlat = (platId) => {
+    return dispatch => {
+        dispatch(fetchPlatRequest());
+        axios.get("http://localhost:8080/api/menus/" + platId)
+        .then(response => {
+                dispatch(PlatSuccess(response.data));
+            })
+            .catch(error => {
+                dispatch(PlatFailure(error.message))
+            });
+            
+    };
+};
+
+const updatePlatRequest = () => {
     return {
-        type: FETCH_PLAT_SUCCESS,
-        payload: plats
+        type: UPDATE_PLAT_REQUEST
+    };
+};
+
+export const updatePlat = plat => {
+    return dispatch => {
+        dispatch(updatePlatRequest());
+        axios.put("http://localhost:8080/api/menus", plat)
+            .then(response => {
+                dispatch(PlatSuccess(response.data));
+            })
+            .catch(error => {
+                dispatch(PlatFailure(error.message))
+            });
+    };
+};
+
+const PlatSuccess = plat => {
+    return {
+        type: PLAT_SUCCESS,
+        payload: plat
     };
 
 };
 
-const fetchPlatFailure = error => {
+const PlatFailure = error => {
     return {
-        type: FETCH_PLAT_FAILURE,
+        type: PLAT_FAILURE,
         payload: error
 
     };
