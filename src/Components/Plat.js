@@ -270,8 +270,6 @@ class Plat extends Component {
                                             <option>{resultatone.categorie}</option>
                                         )
                                         )}
-
-
                                     </Form.Control>
                                 </FormGroup> */}
 

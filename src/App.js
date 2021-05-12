@@ -81,7 +81,7 @@ const App = () => {
 
               <Route path="/Welcome" exact component={Welcome} />
               <Route path="/add" exact component={Plat} />
-              <Route path="/edit/:id" exact component={Plat} />
+              <Route path="/edit/:idrepas" exact component={Plat} />
               <Route path="/list" exact component={PlatList} />
               <Route path="/Home" exact component={Menu} />
               <Route path="/Qr" exact component={Qr} />

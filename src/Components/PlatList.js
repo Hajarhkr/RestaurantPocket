@@ -103,7 +103,7 @@ export default class PlatList extends Component {
         const lastIndex = currentPage * platPerPage;
         const firstIndex = lastIndex - platPerPage;
         const currentPlats = plats.slice(firstIndex, lastIndex);
-        const totalPages = plats.length / platPerPage;
+        const totalPages = Math.ceil(plats.length / platPerPage);
 
         const pageNumCss = {
             width: "45px",
