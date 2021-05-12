@@ -5,7 +5,7 @@ import { FETCH_PLAT_REQUEST, FETCH_PLAT_SUCCESS, FETCH_PLAT_FAILURE } from './pl
 export const fetchPlats = () => {
     return dispatch => {
         dispatch(fetchPlatRequest());
-        axios.get("http://localhost:8080/apii/menus/qr/10")
+        axios.get("http://localhost:8080/api/menus/qr/10")
             .then(response => {
                 dispatch(fetchPlatSuccess(response.data));
             })
