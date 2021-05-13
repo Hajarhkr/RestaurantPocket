@@ -1,5 +1,6 @@
 import React, { Component, state } from 'react'
-
+import { connect } from 'react-redux'
+import { deletePlat } from "../services/Plat/platActions"
 import { Button, ButtonGroup, Card, Table, Image, InputGroup, FormControl, Alert } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faList, faTrash, faEdit, faStepBackward, faFastForward, faFastBackward, faStepForward } from '@fortawesome/free-solid-svg-icons'
@@ -12,7 +13,7 @@ import axios from 'axios'
 const TableColor = { backgroundColor: '#FFFFFF' };
 const CardColor = { backgroundColor: '#f7f6e7' };
 
-export default class PlatList extends Component {
+class PlatList extends Component {
 
     constructor(props) {
         super(props);
@@ -37,21 +38,30 @@ export default class PlatList extends Component {
 
 
     deletePlat = (platId) => {
-        axios.delete("http://localhost:8080/api/menus/" + platId)
-            .then(response => {
-                if (response.data != null) {
-                    this.setState({ "show": true })
-                    setTimeout(() => this.setState({ "show": false }), 3000);
-
-                    this.setState({
-                        plats: this.state.plats.filter(plat => plat.idrepas !== platId)
-                    });
-                } else {
-                    this.setState({ "show": false })
-                }
-                ;
+        this.props.deletePlat(platId);
+        setTimeout(() => {
+            if (this.props.platObject != null) {
+                this.setState({ "show": true })
+                setTimeout(() => this.setState({ "show": false }), 3000);
+                this.findAllPlats(this.state.currentPage);
+            } else {
+                this.setState({ "show": false })
             }
-            )
+        }, 1000)
+
+        // axios.delete("http://localhost:8080/api/menus/" + platId)
+        //     .then(response => {
+        //         if (response.data != null) {
+        //             this.setState({ "show": true })
+        //             setTimeout(() => this.setState({ "show": false }), 3000);
+
+        //             this.setState({
+        //                 plats: this.state.plats.filter(plat => plat.idrepas !== platId)
+        //             });
+        //         } else {
+        //             this.setState({ "show": false })
+        //         }
+        //     })
     };
 
     changePage = event => {
@@ -140,8 +150,8 @@ export default class PlatList extends Component {
                                         </tr> :
                                         currentPlats.map((plat) => (
                                             <tr key={plat.idrepas}>
-                                                <td> 
-                                                     {/* TO DO: deal with the picture text alignenment */}
+                                                <td>
+                                                    {/* TO DO: deal with the picture text alignenment */}
 
                                                     <Image src={plat.image} rounded width="25" height="25" />{' '}
                                                     {plat.nomrepas}
@@ -164,7 +174,7 @@ export default class PlatList extends Component {
                         </Card.Body>
                         <Card.Footer>
                             <div style={{ float: "left" }}>
-                                 Page {currentPage} sur {totalPages}
+                                Page {currentPage} sur {totalPages}
                             </div>
                             <div style={{ float: "right" }}>
                                 <InputGroup size="sm">
@@ -222,3 +232,19 @@ export default class PlatList extends Component {
     }
 
 }
+
+const mapStateToProps = state => {
+    return {
+        platObject: state.plat
+    };
+};
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        deletePlat: (platId) => dispatch(deletePlat(platId)),
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlatList);

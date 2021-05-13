@@ -16,7 +16,7 @@ class Plat extends Component {
         super(props);
         this.state = this.initialState;
         this.state = {
-            categories: [],
+            // categories: [],
             show: false
         }
         this.platChange = this.platChange.bind(this);
@@ -32,47 +32,47 @@ class Plat extends Component {
         if (platId) {
             this.findPlatById(platId);
         }
-        this.findAllCategories();
+        // this.findAllCategories();
 
     }
-    findAllCategories = () => {
-        // axios.get("http://localhost:8080/api/categorie/qr/" + global.qr)
-        //     .then(response => response.data)
-        //     .then((data) => {
-        // // const listCategorie = response.data;
-        // console.log(this.state.categories);
-        // this.setState.toString({
-        //     categories: [{ value: '', display: 'Selectionner une catégorie' }]
-        //         .concat(data.map(categorie => {
-        //             return { value: categorie, display: categorie }
-        //         }))
-        // });
-        //     },
+    // findAllCategories = () => {
+    //     // axios.get("http://localhost:8080/api/categorie/qr/" + global.qr)
+    //     //     .then(response => response.data)
+    //     //     .then((data) => {
+    //     // // const listCategorie = response.data;
+    //     // console.log(this.state.categories);
+    //     // this.setState.toString({
+    //     //     categories: [{ value: '', display: 'Selectionner une catégorie' }]
+    //     //         .concat(data.map(categorie => {
+    //     //             return { value: categorie, display: categorie }
+    //     //         }))
+    //     // });
+    //     //     },
 
-        axios.get("http://localhost:8080/api/categorie/qr/" + global.qr)
-            .then((response) => {
-                const listCategorie = response.data;
-                this.setState({ listCategorie });
-                global.categorie = listCategorie;
-                console.log(global.categorie);
-            },
+    //     axios.get("http://localhost:8080/api/categorie/qr/" + global.qr)
+    //         .then((response) => {
+    //             const listCategorie = response.data;
+    //             this.setState({ listCategorie });
+    //             global.categorie = listCategorie;
+    //             console.log(global.categorie);
+    //         },
 
-            )
-            .then((data) => {
-                // const listCategorie = response.data;
-                console.log(global.categorie);
-                this.setState.toString({
-                    categories: [{ value: '', display: 'Selectionner une catégorie' }]
-                        .concat(data.map(categorie => {
-                            return { value: categorie, display: categorie }
-                        }))
-                })
+    //         )
+    //         .then((data) => {
+    //             // const listCategorie = response.data;
+    //             console.log(global.categorie);
+    //             this.setState.toString({
+    //                 categories: [{ value: '', display: 'Selectionner une catégorie' }]
+    //                     .concat(data.map(categorie => {
+    //                         return { value: categorie, display: categorie }
+    //                     }))
+    //             })
 
-            })
-            .catch((error) => {
-                console.error("error-" + error)
-            });
-    }
+    //         })
+    //         .catch((error) => {
+    //             console.error("error-" + error)
+    //         });
+    // }
 
 
 
@@ -89,42 +89,24 @@ class Plat extends Component {
                     prix: plat.prix,
                     categorie: plat.categorie,
                     image: plat.image,
-                    qr:global.qr
+                    qr: global.qr
                 });
             }
-            }, 1000 )
-
-
-        // axios.get("http://localhost:8080/api/menus/" + platId)
-        //     .then(response => {
-        //         if (response.data != null) {
-        //             this.setState({
-        //                 id: response.data.id,
-        //                 nomrepas: response.data.nomrepas,
-        //                 description: response.data.description,
-        //                 prix: response.data.prix,
-        //                 categorie: response.data.categorie,
-        //                 image: response.data.image,
-
-        //             });
-        //         }
-        //     }).catch((error) => {
-        //         console.error("error-" + error)
-        //     });
+        }, 1000)
     }
 
     resetPlat = () => {
         this.setState(() => this.initialState);
     };
 
-    allcategorie = (event) => {
-        event.map((resultatone) => (
-            <option>{resultatone.categorie}</option>
-        )
+    // allcategorie = (event) => {
+    //     event.map((resultatone) => (
+    //         <option>{resultatone.categorie}</option>
+    //     )
 
-        )
-        console.log("hello")
-    }
+    //     )
+    //     console.log("hello")
+    // }
 
     submitPlat = event => {
         event.preventDefault();
@@ -148,22 +130,9 @@ class Plat extends Component {
             }
         }, 2000)
         this.setState(this.initialState);
-        console.log(this.initialState)
+        console.log(this.state)
     }
 
-
-    //     axios.post("http://localhost:8080/api/menus", plat)
-    //         .then(response => {
-    //             if (response.data != null) {
-    //                 this.setState({ "show": true, "methode": "post" })
-    //                 setTimeout(() => this.setState({ "show": false }), 3000);
-    //             } else {
-    //                 this.setState({ "show": false })
-    //             }
-    //         });
-    //     this.setState(this.initialState);
-    //     console.log(plat);
-    // };
 
     platChange = event => {
 
@@ -178,12 +147,12 @@ class Plat extends Component {
         event.preventDefault();
 
         const plat = {
-            id: this.state.id,
+            idrepas: this.state.idrepas,
             nomrepas: this.state.nomrepas,
             description: this.state.description,
             prix: this.state.prix,
             categorie: this.state.categorie,
-            image: this.state.image
+            image: this.state.image,
         };
 
         axios.put("http://localhost:8080/api/menus", plat)
@@ -197,7 +166,7 @@ class Plat extends Component {
                 }
             });
         this.setState(this.initialState);
-        console.log(plat)
+        console.log("hello")
     };
 
 
@@ -216,7 +185,7 @@ class Plat extends Component {
                 </div>
                 <Card style={CardColor}>
                     <Card.Header><FontAwesomeIcon icon={this.state.id ? faEdit : faPlusSquare} />{' '}{this.state.id ? "Modifier ce plat" : "Ajouter un Plat"}</Card.Header>
-                    <Form onReset={this.resetPlat} onSubmit={this.state.id ? this.updatePlat : this.submitPlat} id="MenuFormId">
+                    <Form onReset={this.resetPlat} onSubmit={this.state.idrepas ? this.updatePlat : this.submitPlat} id="MenuFormId">
                         <Card.Body>
 
 
@@ -296,7 +265,7 @@ class Plat extends Component {
                                 size="sm"
                                 variant="success"
                                 type="submit">
-                                <FontAwesomeIcon icon={faSave} />{' '}{this.state.id ? "Update" : "Ajouter"}
+                                <FontAwesomeIcon icon={faSave} />{' '}{this.state.idrepas ? "Update" : "Ajouter"}
                             </Button>{' '}
                             <Button
                                 size="sm"
