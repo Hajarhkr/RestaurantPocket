@@ -1,0 +1,49 @@
+.datepicker {
+  display: flex;
+  flex-direction: column;
+  padding: 100px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  background-color: #f7f6e7;
+  height: 300px;
+}
+.datepicker span {
+  margin-right: 10px;
+  font-size: 2em;
+  color: black;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.datepicker .date {
+  margin-left: 10px;
+  background-color: #c05812cc;
+  width: 400px;
+  height: 50px;
+}
+
+.hair {
+  border: 3px solid #c05812cc;
+}
+
+.try {
+  width: 300px;
+  height: 50px;
+  border: 0;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.input {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  margin-left: -20px;
+}

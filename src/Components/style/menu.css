@@ -1,0 +1,126 @@
+.containera {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.row__posters {
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  height: fit-content;
+}
+
+.containt {
+  /* overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+  width: fit-content; */
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 30px;
+  display: flex;
+  object-fit: contain;
+}
+
+.containt::-webkit-scrollbar {
+  display: none;
+}
+
+.plat {
+  box-shadow: 7px 7px 60px rgba(0, 0, 0, 0.178);
+  border-radius: 10px;
+  min-width: 350px;
+  max-height: 500px;
+  margin-right: 10px;
+  transition: transform 450ms;
+}
+
+.plat:hover {
+  transform: scale(1.05);
+}
+.image {
+  float: inline-end;
+  height: auto;
+  height: 200px;
+  justify-self: center;
+}
+.ajouter {
+  width: 100%;
+  padding: 10px 20px;
+  outline: none;
+  font-weight: 400;
+  border: 1px solid #607d8b;
+  font-size: 16px;
+  letter-spacing: 1px;
+  background: transparent;
+  border-radius: 30px;
+  margin-top: 20px;
+  background-color: #c05812cc;
+  border: none;
+}
+.titre {
+  color: #c05812cc;
+  font-size: 20px;
+  width: 300px;
+  height: 60px;
+}
+.titreprix span {
+  color: #c05812cc;
+  font-size: 20px;
+}
+.titreprix {
+  color: black;
+  font-weight: 500px;
+  font-size: 15px;
+  width: 300px;
+}
+.description {
+  text-align: justify;
+  width: 300px;
+}
+.categories {
+  text-transform: uppercase;
+  font-size: 3em;
+  text-align: left;
+  color: #607d8b;
+  font-weight: 600;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #c05812cc;
+  display: inline-block;
+  width: fit-content;
+}
+.hair {
+  border: 3px solid #c05812cc;
+}
+
+.logoa {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  justify-items: center;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  padding: 30px 10px;
+}
+.menu {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 3em;
+  text-align: center;
+  color: black;
+  font-weight: 600;
+  font-size: 1.5em;
+  letter-spacing: 1px;
+  padding: 20px;
+}
