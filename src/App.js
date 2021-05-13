@@ -6,14 +6,14 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import NavigationBar from './Components/NavigationBar'
 import Welcome from './Components/Welcome'
 import Footer from './Components/Footer'
-import Plat from './Components/Plat';
-import PlatList from './Components/PlatList';
-import Menu from './Components/Menu';
+import Plat from './Components/Plat/Plat';
+import PlatList from './Components/Plat/PlatList';
+import Menu from './Components/Plat/Menu';
 import Bilan from './Components/Bilan';
 import Qr from './Components/Qr';
-import Login from "./Components/login";
-import Categorie from "./Components/Categorie";
-import Signup from "./Components/Signup";
+import Login from "./Components/R_User/Login";
+import Categorie from "./Components/Plat/Categorie";
+import Signup from "./Components/R_User/Signup";
 import Chef from "./Components/Chef";
 
 import "./Components/globale";
@@ -88,6 +88,7 @@ const App = () => {
               <Route path="/Bilan" exact component={Bilan} />
               <Route path="/categorie" exact component={Categorie} />
               <Route path="/signup" exact component={Signup} />
+              <Route path="/logout" exact component={Login} />
 
 
             </Switch>

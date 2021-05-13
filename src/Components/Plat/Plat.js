@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { savePlat, fetchPlat, updatePlat } from "../services/Plat/platActions"
+import { savePlat, fetchPlat, updatePlat } from "../../services/Plat/platActions"
 import { Card, Form, Button, Col, FormGroup, InputGroup, Image } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave, faPlusSquare, faUndo, faList, faEdit } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
-import MyToast from './MyToast'
-import './globale'
+import MyToast from '../MyToast'
+import '../globale'
 
 const CardColor = { backgroundColor: '#f7f6e7' };
 

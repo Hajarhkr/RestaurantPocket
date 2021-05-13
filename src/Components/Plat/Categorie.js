@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faSave } from '@fortawesome/free-solid-svg-icons'
 import React, { Component } from 'react'
 import { Card, Form, Button, Col, FormGroup } from 'react-bootstrap'
-import './globale'
+import '../globale'
 import axios from 'axios'
 
 

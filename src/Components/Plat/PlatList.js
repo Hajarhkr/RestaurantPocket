@@ -1,13 +1,13 @@
 import React, { Component, state } from 'react'
 import { connect } from 'react-redux'
-import { deletePlat } from "../services/Plat/platActions"
+import { deletePlat } from "../../services/Plat/platActions"
 import { Button, ButtonGroup, Card, Table, Image, InputGroup, FormControl, Alert } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faList, faTrash, faEdit, faStepBackward, faFastForward, faFastBackward, faStepForward } from '@fortawesome/free-solid-svg-icons'
 
-import MyToast from './MyToast'
+import MyToast from '../MyToast'
 import { Link } from 'react-router-dom'
-import './globale'
+import '../globale'
 import axios from 'axios'
 
 const TableColor = { backgroundColor: '#FFFFFF' };
