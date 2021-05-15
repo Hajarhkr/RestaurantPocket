@@ -34,12 +34,26 @@ class NavigationBar extends Component {
                 <Link to={"Qr"} className="nav-link">Qr</Link>
                 <Link to={"Bilan"} className="nav-link">Bilan</Link>
                 <NavDropdown title="Menu" id="collasible-nav-dropdown">
-                        <NavDropdown.Item href="add">Ajouter Plat</NavDropdown.Item>
-                        <NavDropdown.Item  href="list">Liste de plat</NavDropdown.Item>
-                        <NavDropdown.Item href="categorie">Ajouter Catégorie</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                </NavDropdown>
+              <NavDropdown.Item>
+                <Link style={{ color: "black" }} to={"add"}>
+                  Ajouter Plat
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link style={{ color: "black" }} to={"list"}>
+                  Liste de plat
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link style={{ color: "black" }} to={"Categorie"}>
+                  Ajouter Catégorie
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="#action/3.4">
+                Separated link
+              </NavDropdown.Item>
+            </NavDropdown>
             </Nav>
             <Nav className="navbar-right">
                  <Link to={"logout"} className="nav-link" onClick={this.logout}><FontAwesomeIcon icon={faSignOutAlt}/> Logout</Link>
