@@ -9,9 +9,8 @@ import Qr from "./Qr";
 import Categorie from "./Categorie";
 
 
-
-
 function pageadmin() {
+
   return (
     <div>
       {" "}
@@ -21,7 +20,6 @@ function pageadmin() {
           <Route path="/pageadmin" exact component={Menu} />
           <Route path="/Qr" exact component={Qr} />
           <Route path="/Bilan" exact component={Bilan} />
-          {/* not working */}
           <Route path="/add" exact component={Plat} />
           <Route path="/edit/:idrepas" exact component={Plat} />
           <Route path="/list" exact component={PlatList} />

@@ -44,6 +44,12 @@
   align-items: center;
 }
 
-.btn {
-  margin-left: -20px;
+.pasdelement{
+  text-align: center;
+  text-transform: uppercase;
+  text-align: center;
+  color: red;
+  font-weight: 600;
+  font-size: 1.5em;
+  letter-spacing: 1px;
 }

@@ -7,7 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import Bilan from "./Components/Bilan";
+import Plat from "./Components/Plat";
 import Login from "./Components/login";
 import Signup from "./Components/Signup";
 import Chef from "./Components/Chef";
@@ -56,7 +56,7 @@ const App = () => {
 
   return (
     <Router>
-      {/* <Route path="/" exact component={pageadmin} /> */}
+      {/* <Route path="/pageadmin" exact component={pageadmin} /> */}
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
       <Route path="/choix" exact component={Choix} />

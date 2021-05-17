@@ -52,6 +52,8 @@ export default class Plat extends Component {
         console.log(categorie);
     };
 
+  
+
     render() {
         const { categorie } = this.state;
         return (
