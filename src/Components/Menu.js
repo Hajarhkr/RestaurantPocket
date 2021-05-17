@@ -9,16 +9,17 @@ class Menu extends Component {
     menu: [],
     resultat: [],
     plats: [],
+    show: false,
   };
 
   componentDidMount() {
-    console.log("mon qr est " + global.qr);
     MenuService.getallmenu(global.qr).then(
       (response) => {
         const qr = response.data;
         this.setState({ qr });
         global.menu = qr;
-        console.log(global.menu);
+        this.setState({ show: true });
+        console.log(this.state.show);
       },
       (error) => {
         this.setState({
@@ -30,6 +31,12 @@ class Menu extends Component {
             error.toString(),
         });
       }
+    );
+    setTimeout(
+      function () {
+        this.setState({ show: true });
+      }.bind(this),
+      1000
     );
   }
 
@@ -48,7 +55,7 @@ class Menu extends Component {
   }
 
   render() {
-    {
+    if (this.state.show) {
       this.exist(global.menu);
     }
 
