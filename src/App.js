@@ -1,4 +1,4 @@
-import "./App.css";
+// import "./App.css";
 
 import {
   BrowserRouter as Router,
@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import Bilan from "./Components/Bilan";
-import Login from "./Components/R_User/login";
+import Login from "./Components/R_User/Login";
 import Signup from "./Components/R_User/Signup";
 import Chef from "./Components/Chef";
 import administrateur from "./Components/administrateur";
@@ -34,20 +34,20 @@ const authentication = {
 //   this.checkLoginStatus();
 // };
 
-function SecuredRoute(props) {
-  return (
-    <Route
-      path={props.path}
-      render={(data) =>
-        authentication.getLogInStatus() ? (
-          <props.component {...data}></props.component>
-        ) : (
-          <Redirect to={{ pathname: "/login" }}></Redirect>
-        )
-      }
-    ></Route>
-  );
-}
+// function SecuredRoute(props) {
+//   return (
+//     <Route
+//       path={props.path}
+//       render={(data) =>
+//         authentication.getLogInStatus() ? (
+//           <props.component {...data}></props.component>
+//         ) : (
+//           <Redirect to={{ pathname: "/login" }}></Redirect>
+//         )
+//       }
+//     ></Route>
+//   );
+// }
 
 const App = () => {
   const marginTop = {
@@ -56,12 +56,12 @@ const App = () => {
 
   return (
     <Router>
-      {/* <Route path="/" exact component={pageadmin} /> */}
+      <Route path="/" exact component={pageadmin} />
       <Route path="/login" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
       <Route path="/choix" exact component={Choix} />
       <Route path="/admin" exact component={administrateur} />
-      <SecuredRoute path="/choixchef" component={Chef}></SecuredRoute>
+      <Route path="/choixchef" component={Chef}></Route>
       <Route path="/pageadmin" exact component={pageadmin} />
     </Router>
   );

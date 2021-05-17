@@ -2,11 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavigationBar from "./NavigationBar";
 import Plat from "./Plat/Plat";
-import PlatList from "./PlatList";
-import Menu from "./R_User/Menu";
+import PlatList from "./Plat/PlatList";
+import Menu from "../Components/Plat/Categorie";
 import Bilan from "./Bilan";
 import Qr from "./Qr";
-import Categorie from "./R_User/Categorie";
+import Categorie from "./Plat/Categorie";
 
 
 

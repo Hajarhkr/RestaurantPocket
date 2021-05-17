@@ -31,7 +31,7 @@ class Login extends Component {
     this.props.authenticateUser(this.state.email, this.state.passwordrestaut)
     setTimeout(() => {
       if (this.props.auth.isLoggedIn) {
-        return this.props.history.push("/Welcome")
+        return this.props.history.push("/pageadmin")
       } else {
         this.resetLoginForm();
         this.setState({ "error": "Email et mot de passe invalides" })
