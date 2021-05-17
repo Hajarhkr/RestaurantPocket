@@ -131,6 +131,7 @@ class Plat extends Component {
       prix: this.state.prix,
       categorie: this.state.categorie,
       image: this.state.image,
+      qr: global.qr,
     };
 
     axios
