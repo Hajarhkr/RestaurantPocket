@@ -1,23 +1,20 @@
+import "./App.css";
 
-import { Container, Row, Jumbotron, Col } from 'react-bootstrap';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
-import NavigationBar from './Components/NavigationBar'
-import Welcome from './Components/Welcome'
-import Footer from './Components/Footer'
-import Plat from './Components/Plat/Plat';
-import PlatList from './Components/Plat/PlatList';
-import Menu from './Components/Plat/Menu';
-import Bilan from './Components/Bilan';
-import Qr from './Components/Qr';
-import Login from "./Components/R_User/Login";
-import Categorie from "./Components/Plat/Categorie";
+import Bilan from "./Components/Bilan";
+import Login from "./Components/R_User/login";
 import Signup from "./Components/R_User/Signup";
 import Chef from "./Components/Chef";
-
+import administrateur from "./Components/administrateur";
+import Choix from "./Components/Choix";
+import pageadmin from "./Components/pageadmin";
 import "./Components/globale";
-import axios from 'axios';
 
 const authentication = {
   getLogInStatus() {
@@ -37,8 +34,6 @@ const authentication = {
 //   this.checkLoginStatus();
 // };
 
-
-
 function SecuredRoute(props) {
   return (
     <Route
@@ -55,54 +50,21 @@ function SecuredRoute(props) {
 }
 
 const App = () => {
-
   const marginTop = {
-    marginTop: "20px"
+    marginTop: "20px",
   };
 
-
   return (
-
-
-
     <Router>
-      <NavigationBar />
+      {/* <Route path="/" exact component={pageadmin} /> */}
       <Route path="/login" exact component={Login} />
+      <Route path="/signup" exact component={Signup} />
+      <Route path="/choix" exact component={Choix} />
+      <Route path="/admin" exact component={administrateur} />
       <SecuredRoute path="/choixchef" component={Chef}></SecuredRoute>
-
-
-
-      <Container>
-        <Row>
-
-          <Col lg={12} style={marginTop}>
-            <Switch>
-
-
-              <Route path="/Welcome" exact component={Welcome} />
-              <Route path="/add" exact component={Plat} />
-              <Route path="/edit/:idrepas" exact component={Plat} />
-              <Route path="/list" exact component={PlatList} />
-              <Route path="/Home" exact component={Menu} />
-              <Route path="/Qr" exact component={Qr} />
-              <Route path="/Bilan" exact component={Bilan} />
-              <Route path="/categorie" exact component={Categorie} />
-              <Route path="/signup" exact component={Signup} />
-              <Route path="/logout" exact component={Login} />
-
-
-            </Switch>
-
-          </Col>
-
-        </Row>
-      </Container>
-
-
-      {/* <Footer /> */}
+      <Route path="/pageadmin" exact component={pageadmin} />
     </Router>
-  )
-
-}
+  );
+};
 
 export default App;
