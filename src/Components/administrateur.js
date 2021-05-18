@@ -69,7 +69,7 @@ export default class administrateur extends Component {
             </div>
 
             <button className="choixadmi">
-              <span>Verifie</span>
+              <span>Vérifier</span>
             </button>
 
             <div style={{ color: "red", justifyContent: "center" }}>

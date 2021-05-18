@@ -5,6 +5,7 @@ import "./style/bilan.css";
 import "./style/table.css";
 import _ from "underscore";
 import BilanService from "../services/bilan.service";
+import MyToast from "./MyToast";
 import "./globale";
 
 function Bilan() {
@@ -13,7 +14,7 @@ function Bilan() {
   const [allBilan, setallBilan] = useState([]);
   const [allResultat, setallResultat] = useState([]);
   const [total, settotal] = useState([]);
-  const [visible, setvisible] = useState(true);
+  const [visible, setvisible] = useState(false);
 
   useEffect(() => {
     BilanService.getallbilan(global.qr).then(
@@ -40,7 +41,6 @@ function Bilan() {
   function fetchbilan() {
     settotal([]);
     setallResultat([]);
-
     allBilan.map((resultatone) => {
       if (resultatone.date == selectedDate.toISOString().substring(0, 10)) {
         allResultat.push(resultatone);
@@ -49,8 +49,16 @@ function Bilan() {
     });
 
     if (allResultat.length == 0) {
-      alert("pas d'element enregistré sous cette date");
+      // alert("pas d'element enregistré sous cette date");
+      setvisible(true);
+      setTimeout(
+        function () {
+          setvisible(false);
+        }.bind(this),
+        2000
+      );
     } else {
+      setvisible(false);
       global.bilan = allResultat;
       global.total = total;
     }
@@ -68,7 +76,14 @@ function Bilan() {
   }
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
+      <div style={{ position: "absolute", top: "0px", right: " 0px" }}>
+        <MyToast
+          show={visible}
+          message={"Pas de commandes enregistrées sous cette date"}
+          type={"danger"}
+        />
+      </div>
       <div className="datepicker">
         <span>Veuillez Choisir une date </span>
         <div className="input">
@@ -103,21 +118,21 @@ function Bilan() {
         </div>
       </div>
       <div id="tableall">
-      <div style={{width: "80%"}}>
-        <table id="customers">
-          <tr>
-            <th>#Commande</th>
-            <th>Prix</th>
-          </tr>
-          {show()}
-        </table>
-        <table id="customers">
-          <tr>
-            <th>Total</th>
-            <th id="total">{global.total.reduce(reducer)} DH </th>
-          </tr>
-        </table>
-      </div>
+        <div style={{ width: "80%" }}>
+          <table id="customers">
+            <tr>
+              <th>#Commande</th>
+              <th>Prix</th>
+            </tr>
+            {show()}
+          </table>
+          <table id="customers">
+            <tr>
+              <th style={{ width: "70.5%" }}>Total</th>
+              <th id="total">{global.total.reduce(reducer)} DH </th>
+            </tr>
+          </table>
+        </div>
       </div>
     </div>
   );

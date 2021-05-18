@@ -167,7 +167,7 @@ class Plat extends Component {
           <MyToast
             show={this.state.show}
             message={
-              this.state.id
+              this.state.idrepas
                 ? "Plat modifié avec succés"
                 : "Plat enregistré avec success"
             }
