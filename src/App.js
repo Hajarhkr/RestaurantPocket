@@ -57,7 +57,7 @@ const App = () => {
   return (
     <Router>
       {/* <Route path="/pageadmin" exact component={pageadmin} /> */}
-      <Route path="/login" exact component={Login} />
+      <Route path="/" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
       <Route path="/choix" exact component={Choix} />
       <Route path="/admin" exact component={administrateur} />
