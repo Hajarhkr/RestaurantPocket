@@ -231,7 +231,7 @@ export default class Signup extends Component {
                     <p>
                       {" "}
                       Vous avez un compte?
-                      <a href={"/login"} className="to_register">
+                      <a href={"/"} className="to_register">
                         Se Connecter ici
                       </a>
                     </p>

@@ -215,7 +215,7 @@ class Plat extends Component {
               </Form.Row>
               <Form.Row>
                 <Form.Group as={Col} controlId="formGridPrix">
-                  <Form.Label>Prix:</Form.Label>
+                  <Form.Label>Prix: </Form.Label>
                   <Form.Control
                     required
                     autoComplete="off"
@@ -238,6 +238,7 @@ class Plat extends Component {
                     custom
                     onChange={this.platChange}
                   >
+                    <option selected>Choisir une Catégorie</option>
                     {global.categorie.map((resultatone) => (
                       <option>{resultatone.categorie}</option>
                     ))}

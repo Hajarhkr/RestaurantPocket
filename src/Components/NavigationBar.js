@@ -90,7 +90,7 @@ export default class NavigationBar extends Component {
           {/* logout not working */}
           <Nav className="navbar-right">
             <Link to={"/login"} className="nav-link">
-              <FontAwesomeIcon icon={faSignInAlt} /> Logout
+              <FontAwesomeIcon icon={faSignInAlt} /> Déconnexion
             </Link>
           </Nav>
         </Navbar.Collapse>
