@@ -43,6 +43,7 @@ class Plat extends Component {
     prix: "",
     categorie: "",
     image: "",
+    see: false,
   };
 
   componentDidMount = () => {
@@ -60,11 +61,16 @@ class Plat extends Component {
         const listCategorie = response.data;
         this.setState({ listCategorie });
         global.categorie = listCategorie;
-        console.log(global.categorie);
       })
       .catch((error) => {
         console.error("error-" + error);
       });
+    setTimeout(
+      function () {
+        this.setState({ see: true });
+      }.bind(this),
+      1000
+    );
   };
 
   findPlatById = (platId) => {
@@ -146,7 +152,6 @@ class Plat extends Component {
         }
       });
     this.setState(this.initialState);
-    console.log("hello");
   };
 
   platList = () => {
