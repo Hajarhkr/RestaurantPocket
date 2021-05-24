@@ -50,7 +50,7 @@ export default class NavigationBar extends Component {
 
     return (
       <Navbar expand="lg" style={navbar} variant="dark">
-        <Link to={"/"} className="navbar-brand">
+        <Link to={"/Welcome"} className="navbar-brand">
           RestaurantPocket
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -81,15 +81,15 @@ export default class NavigationBar extends Component {
                   Ajouter Catégorie
                 </Link>
               </NavDropdown.Item>
-              <NavDropdown.Divider />
+              {/* <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.4">
                 Separated link
-              </NavDropdown.Item>
+              </NavDropdown.Item> */}
             </NavDropdown>
           </Nav>
           {/* logout not working */}
           <Nav className="navbar-right">
-            <Link to={"/login"} className="nav-link">
+            <Link to={"/"} className="nav-link">
               <FontAwesomeIcon icon={faSignInAlt} /> Déconnexion
             </Link>
           </Nav>

@@ -4,6 +4,7 @@ import "./style/menu.css";
 import Card from "react-bootstrap/Card";
 import MenuService from "../services/menu.service";
 import "./globale";
+import NavigationBar from "./NavigationBar";
 class Menu extends Component {
   state = {
     menu: [],
@@ -60,44 +61,47 @@ class Menu extends Component {
     }
 
     return (
-      <section className="containera">
-        <div className="logo">
-          <div className="hair"></div>
-          <div className="menuA">Menu Restaurant {global.namerestaut}</div>
-          <div className="hair"></div>
-        </div>
-        {this.state.resultat.map((resultatone) => (
-          <div className="row__posters">
-            <h1 className="categories">{resultatone}</h1>
-            <div className="containt">
-              {global.menu.map(function (menuone) {
-                if (menuone.categorie == resultatone)
-                  return (
-                    <Card className="plat">
-                      <Card.Img
-                        className="image"
-                        variant="top"
-                        src={menuone.image}
-                      />
-                      <Card.Body>
-                        <Card.Title className="titre">
-                          {menuone.nomrepas}
-                        </Card.Title>
-                        <Card.Title className="titreprix">
-                          {" "}
-                          Prix : <span>{menuone.prix}</span> DH
-                        </Card.Title>
-                        <Card.Text className="description">
-                          {menuone.description}
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                  );
-              })}
-            </div>
+      <div>
+        <NavigationBar />
+        <section className="containera">
+          <div className="logo">
+            <div className="hair"></div>
+            <div className="menuA">Menu Restaurant {global.namerestaut}</div>
+            <div className="hair"></div>
           </div>
-        ))}
-      </section>
+          {this.state.resultat.map((resultatone) => (
+            <div className="row__posters">
+              <h1 className="categories">{resultatone}</h1>
+              <div className="containt">
+                {global.menu.map(function (menuone) {
+                  if (menuone.categorie == resultatone)
+                    return (
+                      <Card className="plat">
+                        <Card.Img
+                          className="image"
+                          variant="top"
+                          src={menuone.image}
+                        />
+                        <Card.Body>
+                          <Card.Title className="titre">
+                            {menuone.nomrepas}
+                          </Card.Title>
+                          <Card.Title className="titreprix">
+                            {" "}
+                            Prix : <span>{menuone.prix}</span> DH
+                          </Card.Title>
+                          <Card.Text className="description">
+                            {menuone.description}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
+                    );
+                })}
+              </div>
+            </div>
+          ))}
+        </section>
+      </div>
     );
   }
 }

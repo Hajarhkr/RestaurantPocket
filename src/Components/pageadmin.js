@@ -7,15 +7,14 @@ import Menu from "./Menu";
 import Bilan from "./Bilan";
 import Qr from "./Qr";
 import Categorie from "./Categorie";
-
+import Welcome from "./Welcome";
 
 function pageadmin() {
-
   return (
-    <div>
+    <div onkeydown="return (event.keyCode != 116)">
       {" "}
       <Router>
-        <NavigationBar />
+        {/* <NavigationBar /> */}
         <Switch>
           <Route path="/pageadmin" exact component={Menu} />
           <Route path="/Qr" exact component={Qr} />
@@ -24,6 +23,7 @@ function pageadmin() {
           <Route path="/edit/:idrepas" exact component={Plat} />
           <Route path="/list" exact component={PlatList} />
           <Route path="/categorie" exact component={Categorie} />
+          <Route path="/Welcome" exact component={Welcome} />
         </Switch>
       </Router>
     </div>

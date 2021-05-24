@@ -11,6 +11,8 @@ import {
 import QRCode from "qrcode";
 import "./globale";
 
+import NavigationBar from "./NavigationBar";
+
 function Qr() {
   const [imageUrl, setImageUrl] = useState("");
   const classes = useStyles();
@@ -26,6 +28,7 @@ function Qr() {
 
   return (
     <div>
+      <NavigationBar />
       <div>
         {" "}
         <br />
@@ -35,7 +38,7 @@ function Qr() {
       <Container className={classes.conatiner}>
         <Card>
           <h2 className={classes.title}>
-            Generer et Telecharger Votre Code Qr ICI{" "}
+            Générer et télécharger votre code Qr ICI{" "}
           </h2>
           <CardContent>
             <Grid container spacing={2}>

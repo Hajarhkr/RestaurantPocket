@@ -7,7 +7,7 @@ import _ from "underscore";
 import BilanService from "../services/bilan.service";
 import MyToast from "./MyToast";
 import "./globale";
-
+import NavigationBar from "./NavigationBar";
 function Bilan() {
   const reducer = (accumulator, currentValue) => accumulator + currentValue;
   const [selectedDate, setselectedDate] = useState(null);
@@ -77,6 +77,7 @@ function Bilan() {
 
   return (
     <div style={{ position: "relative" }}>
+      <NavigationBar />
       <div style={{ position: "absolute", top: "0px", right: " 0px" }}>
         <MyToast
           show={visible}

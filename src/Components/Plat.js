@@ -21,7 +21,7 @@ import {
 import axios from "axios";
 import MyToast from "./MyToast";
 import "./globale";
-
+import NavigationBar from "./NavigationBar";
 const CardColor = { backgroundColor: "#f7f6e7" };
 
 class Plat extends Component {
@@ -163,6 +163,7 @@ class Plat extends Component {
 
     return (
       <div>
+        <NavigationBar />
         <div style={{ display: this.state.show ? "block" : "none" }}>
           <MyToast
             show={this.state.show}
@@ -238,7 +239,6 @@ class Plat extends Component {
                     custom
                     onChange={this.platChange}
                   >
-                    <option selected>Choisir une Catégorie</option>
                     {global.categorie.map((resultatone) => (
                       <option>{resultatone.categorie}</option>
                     ))}

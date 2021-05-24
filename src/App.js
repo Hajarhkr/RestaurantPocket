@@ -7,7 +7,6 @@ import {
   Redirect,
 } from "react-router-dom";
 
-import Plat from "./Components/Plat";
 import Login from "./Components/login";
 import Signup from "./Components/Signup";
 import Chef from "./Components/Chef";
@@ -15,6 +14,13 @@ import administrateur from "./Components/administrateur";
 import Choix from "./Components/Choix";
 import pageadmin from "./Components/pageadmin";
 import "./Components/globale";
+
+import Plat from "./Components/Plat";
+import PlatList from "./Components/PlatList";
+import Menu from "./Components/Menu";
+import Bilan from "./Components/Bilan";
+import Qr from "./Components/Qr";
+import Categorie from "./Components/Categorie";
 
 const authentication = {
   getLogInStatus() {
@@ -63,6 +69,13 @@ const App = () => {
       <Route path="/admin" exact component={administrateur} />
       <SecuredRoute path="/choixchef" component={Chef}></SecuredRoute>
       <Route path="/pageadmin" exact component={pageadmin} />
+
+      <Route path="/Qr" exact component={Qr} />
+      <Route path="/Bilan" exact component={Bilan} />
+      <Route path="/add" exact component={Plat} />
+      <Route path="/edit/:idrepas" exact component={Plat} />
+      <Route path="/list" exact component={PlatList} />
+      <Route path="/categorie" exact component={Categorie} />
     </Router>
   );
 };

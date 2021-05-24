@@ -5,6 +5,7 @@ import { Card, Form, Button, Col, FormGroup } from "react-bootstrap";
 import "./globale";
 import axios from "axios";
 import MyToast from "./MyToast";
+import NavigationBar from "./NavigationBar";
 
 const CardColor = { backgroundColor: "#f7f6e7" };
 
@@ -56,6 +57,7 @@ export default class Plat extends Component {
     const { categorie } = this.state;
     return (
       <div>
+        <NavigationBar />
         <div style={{ display: this.state.show ? "block" : "none" }}>
           <MyToast
             show={this.state.show}

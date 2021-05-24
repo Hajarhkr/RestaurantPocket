@@ -26,7 +26,7 @@ import MyToast from "./MyToast";
 import { Link } from "react-router-dom";
 import "./globale";
 import axios from "axios";
-
+import NavigationBar from "./NavigationBar";
 const TableColor = { backgroundColor: "#FFFFFF" };
 const CardColor = { backgroundColor: "#f7f6e7" };
 
@@ -141,6 +141,7 @@ class PlatList extends Component {
 
     return (
       <div>
+        <NavigationBar />
         <div>
           <div style={{ display: this.state.show ? "block" : "none" }}>
             <MyToast
