@@ -238,7 +238,9 @@ class Plat extends Component {
                     value={categorie}
                     custom
                     onChange={this.platChange}
+                    className="bg-light text-dark"
                   >
+                    <option value="">--Choisir une catégorie--</option>
                     {global.categorie.map((resultatone) => (
                       <option>{resultatone.categorie}</option>
                     ))}
