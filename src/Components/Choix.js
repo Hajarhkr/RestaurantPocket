@@ -46,7 +46,10 @@ export default class Choix extends Component {
           <div className="box2">
             <Link
               to={"/admin"}
-              onClick={() => localStorage.setItem("myData", global.qr)}
+              onClick={() => {
+                localStorage.setItem("myData", global.qr);
+                localStorage.setItem("namerestau", global.namerestaut);
+              }}
             >
               <button className="choix">
                 <span>Administrateur</span>
@@ -54,7 +57,10 @@ export default class Choix extends Component {
             </Link>
             <Link
               to={"/choixchef"}
-              onClick={() => localStorage.setItem("myData", global.qr)}
+              onClick={() => {
+                localStorage.setItem("myData", global.qr);
+                localStorage.setItem("namerestau", global.namerestaut);
+              }}
             >
               <button className="choix">
                 <span>Chef Cuisinier</span>

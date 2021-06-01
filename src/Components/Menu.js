@@ -66,7 +66,9 @@ class Menu extends Component {
         <section className="containera">
           <div className="logo">
             <div className="hair"></div>
-            <div className="menuA">Menu Restaurant {global.namerestaut}</div>
+            <div className="menuA">
+              Menu Restaurant {localStorage.getItem("namerestau")}
+            </div>
             <div className="hair"></div>
           </div>
           {this.state.resultat.map((resultatone) => (

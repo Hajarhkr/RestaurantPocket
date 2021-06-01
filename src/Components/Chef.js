@@ -24,7 +24,7 @@ const printDocument = (idcommande) => {
   const input = document.getElementById(idcommande);
   html2canvas(input).then((canvas) => {
     const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a6");
+    const pdf = new jsPDF("p", "mm", "a4");
     pdf.addImage(imgData, "JPEG", 0, 0);
     pdf.save("download.pdf");
   });
@@ -138,8 +138,10 @@ class Chef extends Component {
                   marginRight: "20px",
                   marginBottom: "20px",
                 }}
+                id={resultatone}
+                style={{ height: "400mm", width: "100mm" }}
               >
-                <Card className="plat" id={resultatone}>
+                <Card className="plat">
                   <div>
                     <Card.Header
                       style={{
@@ -155,7 +157,7 @@ class Chef extends Component {
                       />
 
                       <text style={{ fontSize: "1.3em", fontWeight: "500" }}>
-                        Restaurant {global.namerestaut}
+                        Restaurant {localStorage.getItem("namerestau")}
                       </text>
                     </Card.Header>
                     <ListGroup className="list-group-flush"></ListGroup>
