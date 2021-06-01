@@ -26,7 +26,7 @@
 }
 
 .hair {
-  border: 3px solid #c05812cc;
+  border: 1px solid #c05812cc;
 }
 
 .try {
@@ -44,7 +44,7 @@
   align-items: center;
 }
 
-.pasdelement{
+.pasdelement {
   text-align: center;
   text-transform: uppercase;
   text-align: center;
@@ -52,4 +52,10 @@
   font-weight: 600;
   font-size: 1.5em;
   letter-spacing: 1px;
+}
+.btna {
+  border: 0px;
+  background-color: transparent;
+  width: 9px;
+ 
 }

@@ -12,13 +12,6 @@
 }
 
 .containt {
-  /* overflow-y: hidden;
-  overflow-x: scroll;
-  padding: 30px;
-  display: flex;
-  flex-direction: row;
-  height: fit-content;
-  width: fit-content; */
   overflow-y: hidden;
   overflow-x: scroll;
   padding: 30px;
@@ -31,7 +24,7 @@
 }
 
 .plat {
-  box-shadow: 7px 7px 60px rgba(0, 0, 0, 0.178);
+  box-shadow: 7px 7px 60px rgba(0, 0, 0, 0.034);
   border-radius: 10px;
   min-width: 350px;
   max-height: 500px;

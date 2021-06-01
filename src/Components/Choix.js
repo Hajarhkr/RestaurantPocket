@@ -55,9 +55,9 @@ export default class Choix extends Component {
             </Link>
           </div>
         </div>
-        <Link className="logout" to={"/"}>
+        {/* <Link className="logout" to={"/"}>
           <img src={logout} alt="logout" />
-        </Link>
+        </Link> */}
       </section>
     );
   }

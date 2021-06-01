@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./globale";
 
 const navbar = { backgroundColor: "#c05812cc" };
 // const navbar = {backgroundColor: '#f2a154'};
@@ -81,15 +82,26 @@ export default class NavigationBar extends Component {
                   Ajouter Catégorie
                 </Link>
               </NavDropdown.Item>
-              {/* <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item> */}
             </NavDropdown>
           </Nav>
-          {/* logout not working */}
+
           <Nav className="navbar-right">
-            <Link to={"/"} className="nav-link">
+            <Link
+              to={"/"}
+              onClick={() => {
+                global.logdin = false;
+                global.email = "";
+                global.namerestaut = "";
+                global.code = "";
+                global.qr = "";
+                global.menu = [];
+                global.bilan = [];
+                global.total = ["0"];
+                global.categorie = [];
+                global.commandes = [];
+              }}
+              className="nav-link"
+            >
               <FontAwesomeIcon icon={faSignInAlt} /> Déconnexion
             </Link>
           </Nav>
