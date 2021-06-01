@@ -1,6 +1,7 @@
 .page0 {
   display: flex;
   flex-direction: column;
+  height: fit-content;
 }
 
 .page0menu {
@@ -16,6 +17,7 @@
   border-bottom: 2px solid #c05812cc;
   display: inline-block;
   width: fit-content;
+  height: fit-content;
 }
 
 .hair {
@@ -26,16 +28,15 @@
   display: flex;
   flex-direction: column;
   padding-top: 10px;
-  height: fit-content;
 }
 
 .containt {
   /* overflow-y: hidden; */
   overflow-y: scroll;
   overflow-x: scroll;
-  padding: 30px;
   display: flex;
   object-fit: contain;
+  height: 700px;
 }
 
 .containt::-webkit-scrollbar {
@@ -45,14 +46,9 @@
 .plat {
   box-shadow: 7px 7px 60px rgba(0, 0, 0, 0.178);
   border-radius: 10px;
-  max-height: 500px;
   margin-right: 10px;
   transition: transform 450ms;
 }
-
-/* .plat:hover {
-  transform: scale(1.05);
-} */
 
 .ajouterb {
   width: 80%;

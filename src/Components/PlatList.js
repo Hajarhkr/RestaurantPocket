@@ -46,7 +46,9 @@ class PlatList extends Component {
 
   findAllPlats() {
     axios
-      .get("http://localhost:8080/api/menus/qr/" + global.qr)
+      .get(
+        "http://localhost:8080/api/menus/qr/" + localStorage.getItem("myData")
+      )
       .then((response) => response.data)
       .then((data) => this.setState({ plats: data }));
   }

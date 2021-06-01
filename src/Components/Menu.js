@@ -14,7 +14,7 @@ class Menu extends Component {
   };
 
   componentDidMount() {
-    MenuService.getallmenu(global.qr).then(
+    MenuService.getallmenu(localStorage.getItem("myData")).then(
       (response) => {
         const qr = response.data;
         this.setState({ qr });

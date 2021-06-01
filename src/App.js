@@ -17,7 +17,7 @@ import "./Components/globale";
 
 import Plat from "./Components/Plat";
 import PlatList from "./Components/PlatList";
-import Menu from "./Components/Menu";
+
 import Bilan from "./Components/Bilan";
 import Qr from "./Components/Qr";
 import Categorie from "./Components/Categorie";
@@ -42,7 +42,6 @@ function SecuredRoute(props) {
   );
 }
 
-
 const App = () => {
   const marginTop = {
     marginTop: "20px",
@@ -50,11 +49,11 @@ const App = () => {
 
   return (
     <Router>
-      {/* <Route path="/" exact component={Bilan} /> */}
-     
-     <Route path="/" exact component={Login} />
+      {/* <Route path="/" exact component={Chef} /> */}
+      <Route path="/" exact component={Login} />
       <Route path="/signup" exact component={Signup} />
-      <SecuredRoute path="/choix" exact component={Choix} />
+      {console.log(global.qr)}
+      <Route path="/choix" exact component={Choix} />
       <Route path="/admin" exact component={administrateur} />
       <Route path="/pageadmin" exact component={pageadmin} />
       <Route path="/choixchef" exact component={Chef} />
@@ -63,7 +62,7 @@ const App = () => {
       <Route path="/add" exact component={Plat} />
       <Route path="/edit/:idrepas" exact component={Plat} />
       <Route path="/list" exact component={PlatList} />
-      <Route path="/categorie" exact component={Categorie} />
+      <Route path="/categorie" exact component={Categorie} /> 
     </Router>
   );
 };

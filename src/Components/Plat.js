@@ -56,7 +56,10 @@ class Plat extends Component {
 
   findAllCategories = () => {
     axios
-      .get("http://localhost:8080/api/categorie/qr/" + global.qr)
+      .get(
+        "http://localhost:8080/api/categorie/qr/" +
+          localStorage.getItem("myData")
+      )
       .then((response) => {
         const listCategorie = response.data;
         this.setState({ listCategorie });
@@ -85,7 +88,7 @@ class Plat extends Component {
           prix: plat.prix,
           categorie: plat.categorie,
           image: plat.image,
-          qr: global.qr,
+          qr: localStorage.getItem("myData"),
         });
       }
     }, 1000);
@@ -104,7 +107,7 @@ class Plat extends Component {
       prix: this.state.prix,
       categorie: this.state.categorie,
       image: this.state.image,
-      qr: global.qr,
+      qr: localStorage.getItem("myData"),
     };
 
     this.props.savePlat(plat);
@@ -137,7 +140,7 @@ class Plat extends Component {
       prix: this.state.prix,
       categorie: this.state.categorie,
       image: this.state.image,
-      qr: global.qr,
+      qr: localStorage.getItem("myData"),
     };
 
     axios

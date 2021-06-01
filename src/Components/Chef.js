@@ -24,7 +24,7 @@ const printDocument = (idcommande) => {
   const input = document.getElementById(idcommande);
   html2canvas(input).then((canvas) => {
     const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a5");
+    const pdf = new jsPDF("p", "mm", "a6");
     pdf.addImage(imgData, "JPEG", 0, 0);
     pdf.save("download.pdf");
   });
@@ -43,7 +43,7 @@ class Chef extends Component {
   };
 
   componentDidMount() {
-    allcommandes.getallcommandes(global.qr).then(
+    allcommandes.getallcommandes(localStorage.getItem("myData")).then(
       (response) => {
         const answer = response.data;
         this.setState({ answer });
@@ -103,6 +103,7 @@ class Chef extends Component {
             to={"/"}
             className="nav-link"
             onClick={() => {
+              localStorage.setItem("myData", 0);
               global.logdin = false;
               global.email = "";
               global.namerestaut = "";
@@ -132,9 +133,14 @@ class Chef extends Component {
             style={{ display: "flex", flexDirection: "row" }}
           >
             {this.state.resultat.map((resultatone) => (
-              <div style={{ marginRight: "20px", marginBottom: "20px" }}>
-                <Card className="plat" style={{ width: "140mm" }}>
-                  <div id={resultatone}>
+              <div
+                style={{
+                  marginRight: "20px",
+                  marginBottom: "20px",
+                }}
+              >
+                <Card className="plat" id={resultatone}>
+                  <div>
                     <Card.Header
                       style={{
                         display: "flex",

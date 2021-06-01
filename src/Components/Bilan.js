@@ -22,7 +22,7 @@ function Bilan() {
   const [modalShow, setModalShow] = React.useState(false);
 
   useEffect(() => {
-    BilanService.getallbilan(global.qr).then(
+    BilanService.getallbilan(localStorage.getItem("myData")).then(
       (response) => {
         const bilan = response.data;
 
@@ -44,9 +44,11 @@ function Bilan() {
   }, []);
 
   function details(idcommande) {
-    allPlats.getallplats(global.qr, idcommande).then((response) => {
-      setallDetails(response.data);
-    });
+    allPlats
+      .getallplats(localStorage.getItem("myData"), idcommande)
+      .then((response) => {
+        setallDetails(response.data);
+      });
 
     setModalShow(true);
   }

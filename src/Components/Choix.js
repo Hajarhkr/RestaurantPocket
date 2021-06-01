@@ -28,6 +28,7 @@ export default class Choix extends Component {
         });
       }
     );
+    // localStorage.setItem("data",global.qr)
   }
 
   render() {
@@ -43,12 +44,18 @@ export default class Choix extends Component {
 
           <h2>Voulez-vous s'authentifier comme </h2>
           <div className="box2">
-            <Link to={"/admin"}>
+            <Link
+              to={"/admin"}
+              onClick={() => localStorage.setItem("myData", global.qr)}
+            >
               <button className="choix">
                 <span>Administrateur</span>
               </button>
             </Link>
-            <Link to={"/choixchef"}>
+            <Link
+              to={"/choixchef"}
+              onClick={() => localStorage.setItem("myData", global.qr)}
+            >
               <button className="choix">
                 <span>Chef Cuisinier</span>
               </button>

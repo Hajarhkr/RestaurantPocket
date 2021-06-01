@@ -88,18 +88,18 @@ export default class NavigationBar extends Component {
           <Nav className="navbar-right">
             <Link
               to={"/"}
-              onClick={() => {
-                global.logdin = false;
-                global.email = "";
-                global.namerestaut = "";
-                global.code = "";
-                global.qr = "";
-                global.menu = [];
-                global.bilan = [];
-                global.total = ["0"];
-                global.categorie = [];
-                global.commandes = [];
-              }}
+              // onClick={() => {
+              //   global.logdin = false;
+              //   global.email = "";
+              //   global.namerestaut = "";
+              //   global.code = "";
+              //   global.qr = "";
+              //   global.menu = [];
+              //   global.bilan = [];
+              //   global.total = ["0"];
+              //   global.categorie = [];
+              //   global.commandes = [];
+              // }}
               className="nav-link"
             >
               <FontAwesomeIcon icon={faSignInAlt} /> Déconnexion

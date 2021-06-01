@@ -19,7 +19,7 @@ function Qr() {
 
   const generateQrCode = async () => {
     try {
-      const response = await QRCode.toDataURL(global.qr.toString());
+      const response = await QRCode.toDataURL(localStorage.getItem("myData").toString());
       setImageUrl(response);
     } catch (error) {
       console.log(error);

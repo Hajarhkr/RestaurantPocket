@@ -36,7 +36,7 @@ export default class Plat extends Component {
 
     const categorie = {
       categorie: this.state.categorie,
-      qr: global.qr,
+      qr: localStorage.getItem("myData"),
     };
 
     axios
