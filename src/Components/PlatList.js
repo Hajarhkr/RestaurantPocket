@@ -9,7 +9,7 @@ import {
   Image,
   InputGroup,
   FormControl,
-  Alert,
+  Container,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -27,8 +27,18 @@ import { Link } from "react-router-dom";
 import "./globale";
 import axios from "axios";
 import NavigationBar from "./NavigationBar";
+
+const GREY = "#9E9E9E";
+
+const CardColor = {
+  backgroundColor: "#f7f6e7",
+  width: '100rem',
+  marginTop: 50,
+  marginBottom: 10,
+  boxShadow: `1px 3px 10px ${GREY}`,
+};
 const TableColor = { backgroundColor: "#FFFFFF" };
-const CardColor = { backgroundColor: "#f7f6e7" };
+
 
 class PlatList extends Component {
   constructor(props) {
@@ -36,7 +46,7 @@ class PlatList extends Component {
     this.state = {
       plats: [],
       currentPage: 1,
-      platPerPage: 4,
+      platPerPage: 6,
     };
   }
 
@@ -150,6 +160,7 @@ class PlatList extends Component {
               type={"danger"}
             />
           </div>
+          <Container className="d-flex h-100" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Card style={CardColor}>
             <Card.Header>
               <FontAwesomeIcon icon={faList} /> Liste de Plats
@@ -263,6 +274,7 @@ class PlatList extends Component {
               </div>
             </Card.Footer>
           </Card>
+          </Container>
         </div>
       </div>
     );

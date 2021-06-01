@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from "react";
 import { connect } from "react-redux";
-import { savePlat, fetchPlat, updatePlat } from "../services/Plat/platActions";
+import { savePlat, fetchPlat,  updatePlat } from "../services/Plat/platActions";
 import {
   Card,
   Form,
@@ -9,6 +9,7 @@ import {
   FormGroup,
   InputGroup,
   Image,
+  Container
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,7 +23,15 @@ import axios from "axios";
 import MyToast from "./MyToast";
 import "./globale";
 import NavigationBar from "./NavigationBar";
-const CardColor = { backgroundColor: "#f7f6e7" };
+
+const GREY = "#9E9E9E";
+const CardColor = {
+  backgroundColor: "#f7f6e7",
+  width: '100rem',
+  marginTop: 50,
+  marginBottom: 10,
+  boxShadow: `1px 3px 10px ${GREY}`,
+};
 
 class Plat extends Component {
   constructor(props) {
@@ -175,6 +184,7 @@ class Plat extends Component {
             type={"success"}
           />
         </div>
+        <Container className="d-flex h-100" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         <Card style={CardColor}>
           <Card.Header>
             <FontAwesomeIcon icon={this.state.id ? faEdit : faPlusSquare} />{" "}
@@ -293,6 +303,7 @@ class Plat extends Component {
             </Card.Footer>
           </Form>
         </Card>
+        </Container>
       </div>
     );
   }

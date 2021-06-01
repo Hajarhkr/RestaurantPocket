@@ -1,13 +1,32 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusSquare, faSave } from "@fortawesome/free-solid-svg-icons";
+import { faList, faPlusSquare, faSave, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import React, { Component } from "react";
-import { Card, Form, Button, Col, FormGroup } from "react-bootstrap";
+import { Card, Form, Button, Container, Row, Table, Col, FormGroup } from "react-bootstrap";
 import "./globale";
 import axios from "axios";
 import MyToast from "./MyToast";
 import NavigationBar from "./NavigationBar";
 
-const CardColor = { backgroundColor: "#f7f6e7" };
+import { connect } from "react-redux";
+import { deletePlat } from "../services/Plat/platActions";
+
+
+
+import { Link } from "react-router-dom";
+import "./globale";
+
+const GREY = "#9E9E9E";
+
+const CardColor = {
+  backgroundColor: "#f7f6e7",
+  width: '40rem',
+  marginTop: 50,
+  marginBottom: 10,
+  boxShadow: `1px 3px 10px ${GREY}`,
+
+
+};
+const TableColor = { backgroundColor: "#FFFFFF" };
 
 export default class Plat extends Component {
   constructor(props) {
@@ -65,33 +84,66 @@ export default class Plat extends Component {
             type={"success"}
           />
         </div>
-        <Card style={CardColor}>
-          <Card.Header>
-            <FontAwesomeIcon icon={faPlusSquare} /> Ajouter une Catégorie
+        <Container className="d-flex h-100" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          {/* <Row className="m-auto align-self-center"> */}
+          <Card style={CardColor}>
+            <Card.Header>
+              <FontAwesomeIcon icon={faPlusSquare} /> Ajouter une Catégorie
           </Card.Header>
-          <Form onSubmit={this.submitCategorie} id="CategorieFormId">
-            <Card.Body>
-              <Form.Group>
-                <Form.Label> Catégorie: *</Form.Label>
-                <Form.Control
-                  required
-                  autoComplete="off"
-                  type="text"
-                  name="categorie"
-                  value={categorie}
-                  onChange={this.categorieChange}
-                  className="bg-light text-dark"
-                  placeholder="Entrer une catégorie"
-                />
-              </Form.Group>
-            </Card.Body>
-            <Card.Footer style={{ textAlign: "right" }}>
-              <Button size="sm" variant="success" type="submit">
-                <FontAwesomeIcon icon={faSave} /> Ajouter
+            <Form onSubmit={this.submitCategorie} id="CategorieFormId">
+              <Card.Body>
+                <Form.Group>
+                  <Form.Label> Catégorie: *</Form.Label>
+                  <Form.Control
+                    required
+                    autoComplete="off"
+                    type="text"
+                    name="categorie"
+                    value={categorie}
+                    onChange={this.categorieChange}
+                    className="bg-light text-dark"
+                    placeholder="Entrer une catégorie"
+                  />
+                </Form.Group>
+              </Card.Body>
+              <Card.Footer style={{ textAlign: "right" }}>
+                <Button size="sm" variant="success" type="submit">
+                  <FontAwesomeIcon icon={faSave} /> Ajouter
               </Button>
-            </Card.Footer>
-          </Form>
-        </Card>
+              </Card.Footer>
+            </Form>
+          </Card>
+        </Container>
+
+
+
+        {/* The table of Categories */}
+
+        <Container className="d-flex h-100" style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <Card style={CardColor}>
+            <Card.Header>
+              <FontAwesomeIcon icon={faList} /> Vos Catégories
+            </Card.Header>
+            <Card.Body>
+              <Table border hover striped variant="light" style={TableColor}>
+                <thead>
+                  <tr>
+                    <th>Catégorie</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr align="center">
+                    <td colSpan="5"> {categorie.length} catégories enregistrés</td>
+                  </tr>
+
+
+                </tbody>
+              </Table>
+            </Card.Body>
+          </Card>
+         </Container>
       </div>
     );
   }
