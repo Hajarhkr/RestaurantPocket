@@ -7,10 +7,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
 
-        case SAVE_PLAT_REQUEST:
-        case FETCH_PLAT_REQUEST:
-        case DELETE_PLAT_REQUEST:
-        case UPDATE_PLAT_REQUEST:
+        case SAVE_PLAT_REQUEST || FETCH_PLAT_REQUEST || UPDATE_PLAT_REQUEST || DELETE_PLAT_REQUEST:
             return {
                 ...state
             };

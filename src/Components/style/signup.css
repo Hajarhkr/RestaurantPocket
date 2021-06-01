@@ -101,9 +101,6 @@ section .contentBx .formBx .inputBx .form-control-button {
   margin-top: 20px;
   background-color: #c05812cc;
   border: none;
-}
-
-section .contentBx .formBx .inputBx .form-control-button span {
   color: #fff;
   outline: none;
   font-weight: 500;
@@ -126,8 +123,8 @@ section .contentBx .formBx .inputBx p .nav-link {
   line-height: 1em;
 }
 
-.alertalert-danger{
-    color: red;
+.alertalert-danger {
+  color: red;
 }
 @media (max-width: 900px) {
   section .imgBx {
@@ -155,5 +152,4 @@ section .contentBx .formBx .inputBx p .nav-link {
   section .contentBx .formBx .logo {
     align-self: center;
   }
-  
 }

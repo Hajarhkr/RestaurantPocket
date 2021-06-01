@@ -69,7 +69,7 @@ export default class administrateur extends Component {
             </div>
 
             <button className="choixadmi">
-              <span>Verifie</span>
+              <span>Vérifier</span>
             </button>
 
             <div style={{ color: "red", justifyContent: "center" }}>
@@ -79,9 +79,9 @@ export default class administrateur extends Component {
           </Form>
         </div>
         <div className="restautname">{global.namerestaut}</div>
-        <Link className="logout" to={"/"}>
+        {/* <Link className="logout" to={"/"}>
           <img src={logout} alt="logout" />
-        </Link>
+        </Link> */}
       </section>
     );
   }

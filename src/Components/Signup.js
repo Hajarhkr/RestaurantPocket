@@ -4,10 +4,10 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { Link } from "react-router-dom";
-import AuthService from "../../services/auth.service.restaut"
-import "../style/signup.css";
-import bk from "../images/bk1.jpg";
-import logo from "../images/logo.png";
+import AuthService from "../services/auth.service.restaut";
+import "./style/signup.css";
+import bk from "./images/bk1.jpg";
+import logo from "./images/logo.png";
 
 const required = (value) => {
   if (!value) {
@@ -231,8 +231,8 @@ export default class Signup extends Component {
                     <p>
                       {" "}
                       Vous avez un compte?
-                      <a href={"/login"} className="to_register">
-                        {' '}Se Connecter ici
+                      <a href={"/"} className="to_register">
+                        Se Connecter ici
                       </a>
                     </p>
                   </div>

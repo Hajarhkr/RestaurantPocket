@@ -2,7 +2,7 @@
 section {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
 }
 
@@ -107,7 +107,6 @@ section .contentBx .formBx .inputBx .form-control-button {
 section .contentBx .formBx .inputBx .form-control-button span {
   color: #fff;
   outline: none;
-
   font-weight: 500;
   cursor: pointer;
 }
@@ -133,6 +132,16 @@ section .contentBx .formBx .inputBx p .nav-link {
 .alertalert-danger {
   color: red;
 }
+
+div .row {
+  display: none;
+  visibility: hidden;
+}
+
+.to_register {
+  text-decoration: none;
+  color: #c05812cc;
+}
 @media (max-width: 900px) {
   section .imgBx {
     position: absolute;
@@ -154,6 +163,5 @@ section .contentBx .formBx .inputBx p .nav-link {
     width: 100%;
     padding: 40px;
     background-color: rgb(255 255 255 / 0.9);
-    margin: 50px;
   }
 }

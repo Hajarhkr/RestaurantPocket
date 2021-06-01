@@ -40,7 +40,7 @@ export default class Choix extends Component {
           <div className="logo">
             <img src={logo} alt="logo" />
           </div>
-          
+
           <h2>Voulez-vous s'authentifier comme </h2>
           <div className="box2">
             <Link to={"/admin"}>
@@ -50,14 +50,14 @@ export default class Choix extends Component {
             </Link>
             <Link to={"/choixchef"}>
               <button className="choix">
-                <span>Chef Cuisine</span>
+                <span>Chef Cuisinier</span>
               </button>
             </Link>
           </div>
         </div>
-        <Link className="logout" to={"/"}>
+        {/* <Link className="logout" to={"/"}>
           <img src={logout} alt="logout" />
-        </Link>
+        </Link> */}
       </section>
     );
   }
